@@ -1,11 +1,47 @@
-# Starship
-eval "$(starship init zsh)"
+# ============================================================
+# PATH (foundation)
+# ============================================================
+# 思想: ユーザーローカルのbinを最優先に配置する
+# - システムやパッケージマネージャーのbinより優先
+# - カスタムスクリプトや手動インストールツールを優先的に使用
+typeset -U path PATH
+[[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 
-# fzf (prefer Homebrew install)
-if [[ -f ~/.fzf.zsh ]]; then
-  source ~/.fzf.zsh
-elif command -v brew >/dev/null 2>&1 && [[ -f "$(brew --prefix)/opt/fzf/shell/completion.zsh" ]]; then
-  source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
-  source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
+# ============================================================
+# History
+# ============================================================
+# 思想: 履歴は貴重な資産。大量に保持し、セッション間で共有する
+# - 10万件の履歴を保持（長期間の作業履歴を検索可能に）
+# - SHARE_HISTORY: 全セッションで履歴を即座に共有（複数ターミナルで同期）
+# - INC_APPEND_HISTORY: コマンド実行と同時に履歴に追加（即座に検索可能）
+# - HIST_IGNORE_DUPS: 連続する重複コマンドを無視（履歴をクリーンに保つ）
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS
+
+# ============================================================
+# fzf (history/search core)
+# ============================================================
+# 思想: 履歴検索は必須機能。柔軟にインストール方法に対応し、必須ではない
+# - 複数のインストール方法に対応（手動インストール、Homebrew）
+# - 存在しない場合はエラーにせずスキップ（ポータブルな設定）
+# - 大量の履歴を効率的に検索するためのコアツール
+if command -v fzf >/dev/null 2>&1; then
+  if [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+  elif command -v brew >/dev/null 2>&1; then
+    FZF_BASE="$(brew --prefix)/opt/fzf"
+    [[ -f "$FZF_BASE/shell/completion.zsh" ]] && source "$FZF_BASE/shell/completion.zsh"
+    [[ -f "$FZF_BASE/shell/key-bindings.zsh" ]] && source "$FZF_BASE/shell/key-bindings.zsh"
+  fi
 fi
-export PATH="$HOME/.local/bin:$PATH"
+
+# ============================================================
+# Prompt (visual, last)
+# ============================================================
+# 思想: 視覚的な設定は最後に読み込む（他の設定に影響を与えない）
+# - プロンプトは見た目だけの機能なので、機能的な設定の後に配置
+# - 存在しない場合はスキップ（必須ではない装飾機能）
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
