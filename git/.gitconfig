@@ -7,4 +7,12 @@
 
 [core]
   editor = code --wait
+  pager = delta
   excludesfile = ~/.gitignore_global
+
+[delta]
+  syntax-theme = Dracula
+  features = decorations
+  navigate = true
+  line-numbers = true
+  whitespace-error-style = none
