@@ -8,3 +8,4 @@ elif command -v brew >/dev/null 2>&1 && [[ -f "$(brew --prefix)/opt/fzf/shell/co
   source "$(brew --prefix)/opt/fzf/shell/completion.zsh"
   source "$(brew --prefix)/opt/fzf/shell/key-bindings.zsh"
 fi
+export PATH="$HOME/.local/bin:$PATH"
