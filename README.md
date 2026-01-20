@@ -40,7 +40,9 @@ dotfiles/
 │   ├── .gitconfig
 │   └── .gitignore_global
 ├── nvim/
-│   └── init.lua
+│   ├── init.lua
+│   └── lua/
+│       └── core.lua
 ├── zsh/
 │   └── .zshrc
 ├── starship/
