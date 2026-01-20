@@ -55,3 +55,13 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# ============================================================
+# エイリアス（ls, li）
+# ============================================================
+# ezaコマンドを使って、見やすいアイコン付きリスト表示を提供
+# - ls:    通常表示をeza + アイコンで実現
+# - li:    詳細（-la）表示＋Git情報＋アイコン付き
+
+alias ls="eza --icons"
+alias li="eza -la --icons --git"
