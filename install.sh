@@ -92,6 +92,9 @@ if ! mkdir -p "$HOME/.config"; then
 fi
 create_symlink "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 
+# nvim
+create_symlink "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+
 if [[ -d "$BACKUP_DIR" ]]; then
     echo ""
     echo "📦 バックアップは $BACKUP_DIR に保存されました。"

@@ -10,6 +10,7 @@ SYMLINKS=(
     "$HOME/.gitconfig"
     "$HOME/.gitignore_global"
     "$HOME/.config/starship.toml"
+    "$HOME/.config/nvim"
 )
 
 # シンボリックリンクを削除する関数
@@ -61,22 +62,38 @@ restore_backup() {
         echo ""
         echo "📦 $selected_backup から復元します..."
 
-        for file in "$selected_backup"/*; do
-            if [[ -f "$file" ]]; then
-                local filename=$(basename "$file")
-                local dest="$HOME/$filename"
+        for item in "$selected_backup"/*; do
+            if [[ ! -e "$item" ]]; then
+                continue
+            fi
 
-                # starship.tomlの場合は.configに復元
-                if [[ "$filename" == "starship.toml" ]]; then
-                    dest="$HOME/.config/starship.toml"
-                fi
+            local name
+            name="$(basename "$item")"
 
-                if [[ -e "$dest" ]]; then
-                    echo "⚠️  $dest は既に存在します。スキップします。"
-                else
-                    cp "$file" "$dest"
-                    echo "✓ $filename を $dest に復元しました。"
-                fi
+            local dest="$HOME/$name"
+
+            # .config 配下に復元するもの
+            if [[ "$name" == "starship.toml" ]]; then
+                mkdir -p "$HOME/.config"
+                dest="$HOME/.config/starship.toml"
+            elif [[ "$name" == "nvim" ]]; then
+                mkdir -p "$HOME/.config"
+                dest="$HOME/.config/nvim"
+            fi
+
+            if [[ -e "$dest" ]]; then
+                echo "⚠️  $dest は既に存在します。スキップします。"
+                continue
+            fi
+
+            if [[ -d "$item" ]]; then
+                cp -R "$item" "$dest"
+                echo "✓ $name を $dest に復元しました。"
+            elif [[ -f "$item" ]]; then
+                cp "$item" "$dest"
+                echo "✓ $name を $dest に復元しました。"
+            else
+                echo "⚠️  $name は未対応の形式です。スキップします。"
             fi
         done
     else

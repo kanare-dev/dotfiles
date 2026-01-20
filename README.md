@@ -7,6 +7,7 @@
 - **zsh**: `.zshrc` 設定ファイル
 - **git**: `.gitconfig` と `.gitignore_global` 設定ファイル
 - **starship**: プロンプトカスタマイズ設定 (`starship.toml`)
+- **nvim**: Neovim 設定 (`~/.config/nvim`)
 
 ## 前提条件
 
@@ -38,6 +39,8 @@ dotfiles/
 ├── git/
 │   ├── .gitconfig
 │   └── .gitignore_global
+├── nvim/
+│   └── init.lua
 ├── zsh/
 │   └── .zshrc
 ├── starship/
