@@ -19,6 +19,23 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS
 
+# 履歴の質をさらに上げる（任意）
+# - EXTENDED_HISTORY: タイムスタンプ等を保存（あとで見返しやすい）
+# - HIST_IGNORE_ALL_DUPS: 履歴全体で重複を減らす
+# - HIST_REDUCE_BLANKS: 余計な空白を除去
+setopt EXTENDED_HISTORY HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+
+# ============================================================
+# Completion (zsh builtin)
+# ============================================================
+# 思想: Zsh 標準補完を有効化し、必要なら見た目/挙動を整える
+autoload -Uz compinit
+compinit
+
+# 代表的な補完スタイル（好みで調整）
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
 # ============================================================
 # fzf (history/search core)
 # ============================================================
@@ -66,8 +83,12 @@ fi
 # ezaコマンドを使って、見やすいアイコン付きリスト表示を提供
 # - ls:    通常表示をeza + アイコンで実現
 # - li:    詳細（-la）表示＋Git情報＋アイコン付き
-alias ls="eza --icons"
-alias li="eza -la --icons --git"
+if command -v eza >/dev/null 2>&1; then
+  alias ls="eza --icons"
+  alias li="eza -la --icons --git"
+else
+  alias li="ls -la"
+fi
 
 # ============================================================
 # secrets (do not commit)
@@ -97,11 +118,11 @@ fi
 # zsh-syntax-highlighting: コマンドの構文を色付け表示
 # - Homebrew でインストールされている場合のみ有効化
 # - 存在しない場合はスキップ（エラーにならない）
-if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
-  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
-if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-  source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX="$(brew --prefix)"
+  if [[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  fi
 fi
 
 # ============================================================
@@ -112,4 +133,12 @@ fi
 # - 存在しない場合はスキップ（エラーにならない）
 if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
+fi
+
+# zsh-syntax-highlighting はできるだけ最後に読むのが推奨
+if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX="$(brew --prefix)"
+  if [[ -f "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  fi
 fi
