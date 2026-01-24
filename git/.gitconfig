@@ -11,6 +11,48 @@
   # Global gitignore file location
   excludesfile = ~/.gitignore_global
 
+# Fetch behavior
+[fetch]
+  prune = true
+
+# Pull behavior
+[pull]
+  rebase = true
+
+# Rebase behavior
+[rebase]
+  autoStash = true
+  # rebase 中にコミットが落ちた可能性を検知しやすくする
+  # (対応していない Git では無視されます)
+  missingCommitsCheck = error
+
+# Push behavior
+[push]
+  autoSetupRemote = true
+
+# Conflict resolution helper
+[rerere]
+  enabled = true
+
+# Safe workflows (aliases)
+[alias]
+  # sync: fetch→(未pushコミットがあればバックアップブランチ作成)→rebase @{u}
+  # - backup/<branch>-YYYYMMDD-HHMMSS を作るので、rebase で迷子になっても戻れます
+  # - upstream が無い場合は案内して終了します
+  sync = "!f(){ \
+    git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1 || { \
+      echo \"No upstream. Run: git push -u origin HEAD\"; exit 1; \
+    }; \
+    git fetch --prune; \
+    b=$(git symbolic-ref --quiet --short HEAD || echo HEAD); \
+    if [ -n \"$(git rev-list --count @{u}..HEAD 2>/dev/null)\" ] && [ \"$(git rev-list --count @{u}..HEAD 2>/dev/null)\" -gt 0 ]; then \
+      ts=$(date +%Y%m%d-%H%M%S); \
+      git branch \"backup/${b}-${ts}\" >/dev/null 2>&1 || true; \
+      echo \"Created backup branch: backup/${b}-${ts}\"; \
+    fi; \
+    git rebase --autostash @{u}; \
+  }; f"
+
 # Delta pager configuration (enhanced diff viewer)
 [delta]
   syntax-theme = Dracula
