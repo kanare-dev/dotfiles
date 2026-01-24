@@ -78,3 +78,13 @@ alias li="eza -la --icons --git"
 if [[ -f "$HOME/.zshrc.secret" ]]; then
   source "$HOME/.zshrc.secret"
 fi
+
+# ============================================================
+# direnv（環境変数切り替え支援）
+# ============================================================
+# 思想: プロジェクトごとに必要な環境変数を自動で切り替える
+# - direnvコマンドが存在する場合のみ有効化
+# - 存在しない場合はスキップ（エラーにならない）
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
