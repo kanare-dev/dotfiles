@@ -103,3 +103,13 @@ fi
 if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 fi
+
+# ============================================================
+# zoxide（ディレクトリ移動補助）
+# ============================================================
+# 思想: ディレクトリ移動を補助する
+# - zoxideコマンドが存在する場合のみ有効化
+# - 存在しない場合はスキップ（エラーにならない）
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
