@@ -61,7 +61,7 @@ unknown_symbol = "󰂑"
 format = "[ $symbol$percentage ]($style)"
 
 [[battery.display]]
-threshold = 100
+threshold = 30
 style = "bg:#585858 fg:#CCCC11"
 
 # ユーザー名（通常は非表示、SSH接続時のみ表示）
@@ -180,7 +180,7 @@ symbol = "📦 "
 style = "bg:#444444 fg:#FFAF5F"
 display_private = false
 
-# 実行時間（10秒以上かかったコマンドのみ表示）
+# 実行時間（1秒以上かかったコマンドのみ表示）
 [cmd_duration]
 min_time = 1_000
 format = "[  $duration ]($style)"
