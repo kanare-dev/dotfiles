@@ -88,3 +88,18 @@ fi
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
+
+
+# ============================================================
+# zsh-補完・強調表示（視認性強化系）
+# ============================================================
+# zsh-autosuggestions: 入力補完を提案してくれる
+# zsh-syntax-highlighting: コマンドの構文を色付け表示
+# - Homebrew でインストールされている場合のみ有効化
+# - 存在しない場合はスキップ（エラーにならない）
+if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
+if [[ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
