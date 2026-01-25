@@ -133,9 +133,9 @@ tag_symbol = " 🔖 "
 # Git メトリクス
 [git_metrics]
 disabled = false
-format = "[ +$added]($added_style)[/](bg:#77aec9 fg:#585858)[-$deleted]($deleted_style)"
-added_style = "bg:#77aec9 fg:#00AF00"
-deleted_style = "bg:#77aec9 fg:#D70000"
+format = "[ +$added]($added_style)[/-$deleted]($deleted_style)"
+added_style = "bg:#77aec9 fg:#585858"
+deleted_style = "bg:#77aec9 fg:#585858"
 
 # Node.js
 [nodejs]
