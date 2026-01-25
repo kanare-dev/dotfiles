@@ -88,7 +88,7 @@ format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)"
 truncation_length = 4
 truncation_symbol = "…/"
 truncate_to_repo = true
-home_symbol = "󰋜"
+home_symbol = "󰋜 ~"
 use_os_path_sep = false
 fish_style_pwd_dir_length = 2
 
