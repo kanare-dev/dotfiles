@@ -98,13 +98,14 @@ alias cpi='cp -i'
 if command -v eza >/dev/null 2>&1; then
   alias ls="eza --icons"
   alias li="eza -la --icons --git"
+
   lt() { command eza --tree --icons "$@"; }
 else
   alias li="ls -la"
 fi
 
 # cdしたら中身が見える（eza/lsどっちでもOK）
-chpwd() { ls -A; }
+chpwd() { ls; }
 
 # ============================================================
 # secrets (do not commit)
