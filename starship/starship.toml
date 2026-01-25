@@ -6,8 +6,9 @@ add_newline = false
 
 # プロンプトのフォーマット
 format = """
-[](fg:#585858)\
+[](fg:#F2F2F2)\
 $os\
+[](fg:#F2F2F2 bg:#585858)\
 $username\
 $hostname\
 $battery\
@@ -40,7 +41,7 @@ symbol = " "
 
 # os
 [os]
-style = "bg:#585858 fg:#F2F2F2"
+style = "bg:#F2F2F2 fg:#585858"
 format = "[ $symbol ]($style)"
 disabled = false
 [os.symbols]
