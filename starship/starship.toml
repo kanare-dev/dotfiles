@@ -193,7 +193,7 @@ detect_folders = ["Godeps"]
 # Terraform
 [terraform]
 format = "[  󱁢 $version ($workspace) ]($style)"
-style = "fg:#7AA6FF"
+style = "fg:#7B42BC"
 detect_extensions = ["tf", "tfvars", "tfplan", "tfstate", "hcl"]
 detect_files = ["terraform.tfstate", ".terraform.lock.hcl", "terragrunt.hcl"]
 
@@ -206,7 +206,7 @@ style = "fg:#FFAF5F"
 # Docker コンテキスト
 [docker_context]
 format = "[  $symbol$context ]($style)"
-symbol = "🐳 "
+symbol = " "
 style = "fg:#5F87FF"
 only_with_files = true
 detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", ".dockerignore"]
@@ -215,7 +215,7 @@ detect_folders = []
 # パッケージ情報（package.json など）
 [package]
 format = "[  $symbol$version ]($style)"
-symbol = "📦 "
+symbol = "󰏗 "
 style = "fg:#FFAF5F"
 display_private = false
 
