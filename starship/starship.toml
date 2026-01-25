@@ -38,38 +38,15 @@ $package\
 $localip
 """
 
-# 左右分割（右寄せ用）
-[fill]
-symbol = "─"
-style = "bold cyan"
-
 # os
 [os]
 style = "bg:#F2F2F2 fg:#585858"
 format = "[ $symbol ]($style)"
 disabled = false
+
 [os.symbols]
 Macos = "" #リンゴのicon
 Ubuntu = "" #Ubuntuのicon
-
-# プロンプト記号
-[character]
-success_symbol = "[>](bold green) "
-error_symbol = "[>](bold red) "
-vimcmd_symbol = "[>](bold green) "
-
-# バッテリー（バッテリー駆動時に表示されやすくする）
-[battery]
-full_symbol = "󰁹"
-empty_symbol = ""
-charging_symbol = "󰂄"
-discharging_symbol = "󰂀"
-unknown_symbol = "󰂑"
-format = "[ $symbol$percentage ]($style)"
-
-[[battery.display]]
-threshold = 30
-style = "bg:#585858 fg:#CCCC11"
 
 # ユーザー名（通常は非表示、SSH接続時のみ表示）
 [username]
@@ -83,6 +60,19 @@ style_root = "bg:#585858 fg:#FF5F5F"
 ssh_only = true
 format = "[  $hostname ]($style)"
 style = "bg:#585858 fg:#CFCFCF"
+
+# バッテリー（バッテリー駆動時に表示されやすくする）
+[battery]
+full_symbol = "󰁹"
+empty_symbol = ""
+charging_symbol = "󰂄"
+discharging_symbol = "󰂀"
+unknown_symbol = "󰂑"
+format = "[ $symbol$percentage ]($style)"
+
+[[battery.display]]
+threshold = 30
+style = "bg:#585858 fg:#CCCC11"
 
 # ディレクトリ
 [directory]
@@ -127,6 +117,13 @@ ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 
+# Git メトリクス
+[git_metrics]
+disabled = false
+format = "[ +$added]($added_style)[/-$deleted]($deleted_style)"
+added_style = "bg:#77aec9 fg:#585858"
+deleted_style = "bg:#77aec9 fg:#585858"
+
 # Git コミット（detached HEAD時など）
 [git_commit]
 style = "bg:#77aec9 fg:#303030"
@@ -135,12 +132,10 @@ commit_hash_length = 4
 only_detached = true
 tag_symbol = " 🔖 "
 
-# Git メトリクス
-[git_metrics]
-disabled = false
-format = "[ +$added]($added_style)[/-$deleted]($deleted_style)"
-added_style = "bg:#77aec9 fg:#585858"
-deleted_style = "bg:#77aec9 fg:#585858"
+# 左右分割（右寄せ用）
+[fill]
+symbol = "─"
+style = "bold cyan"
 
 # 実行時間（1秒以上かかったコマンドのみ表示）
 [cmd_duration]
@@ -155,6 +150,12 @@ format = "[  $time ]($style)"
 style = "bg:#444444 fg:#F2F2F2"
 use_12hr = false
 time_format = "%T"
+
+# プロンプト記号
+[character]
+success_symbol = "[>](bold green) "
+error_symbol = "[>](bold red) "
+vimcmd_symbol = "[>](bold green) "
 
 # Node.js
 [nodejs]
@@ -188,6 +189,13 @@ style = "fg:#5FD7FF"
 detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock", ".go-version"]
 detect_folders = ["Godeps"]
 
+# AWS（AWS_PROFILE があるときだけ profile を表示）
+[aws]
+disabled = false
+format = "[  󰸏 $profile ]($style)"
+style = "fg:#FFAF5F"
+
+
 # Docker コンテキスト
 [docker_context]
 format = "[  $symbol$context ]($style)"
@@ -210,9 +218,3 @@ ssh_only = true
 format = "[  󰩟 $localipv4 ]($style)"
 style = "fg:#CFCFCF"
 disabled = false
-
-# AWS（AWS_PROFILE があるときだけ profile を表示）
-[aws]
-disabled = false
-format = "[  󰸏 $profile ]($style)"
-style = "fg:#FFAF5F"
