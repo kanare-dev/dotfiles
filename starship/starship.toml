@@ -13,12 +13,14 @@ $hostname\
 $battery\
 [](fg:#585858 bg:#0087AF)\
 $directory\
-[](fg:#0087AF)\
-$fill\
-[](fg:#444444)\
+[](fg:#0087AF bg:#77aec9)\
 $git_branch\
 $git_status\
+$git_metrics\
 $git_commit\
+[](fg:#77aec9)\
+$fill\
+[](fg:#444444)\
 $nodejs\
 $python\
 $rust\
@@ -99,14 +101,14 @@ fish_style_pwd_dir_length = 2
 # Git ブランチ
 [git_branch]
 symbol = ""
-style = "bg:#444444 fg:#CF9562"
+style = "bg:#77aec9 fg:#303030"
 format = "[ $symbol $branch(:$remote_branch) ]($style)"
 truncation_length = 20
 truncation_symbol = "…"
 
 # Git ステータス（変更がある場合のみ表示）
 [git_status]
-style = "bg:#444444 fg:#CFCFCF"
+style = "bg:#77aec9 fg:#303030"
 format = "[$all_status$ahead_behind]($style)"
 conflicted = " 󰞇${count}"
 up_to_date = ""
@@ -122,15 +124,18 @@ diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 
 # Git コミット（detached HEAD時など）
 [git_commit]
-style = "bg:#444444 fg:#CFCFCF"
+style = "bg:#77aec9 fg:#303030"
 format = "[  $hash$tag ]($style)"
 commit_hash_length = 4
 only_detached = true
 tag_symbol = " 🔖 "
 
-# Git メトリクス（無効化）
+# Git メトリクス
 [git_metrics]
-disabled = true
+disabled = false
+format = "[ +$added]($added_style)[/](bg:#77aec9 fg:#585858)[-$deleted]($deleted_style)"
+added_style = "bg:#77aec9 fg:#00AF00"
+deleted_style = "bg:#77aec9 fg:#D70000"
 
 # Node.js
 [nodejs]
