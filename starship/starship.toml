@@ -22,6 +22,12 @@ $git_commit\
 [](fg:#77aec9)\
 $fill\
 [](fg:#444444)\
+$cmd_duration\
+$time\
+[](fg:#444444)
+[╰─────](bold cyan)$character"""
+
+right_format = """
 $nodejs\
 $python\
 $rust\
@@ -29,11 +35,8 @@ $golang\
 $aws\
 $docker_context\
 $package\
-$cmd_duration\
-$localip\
-$time\
-[](fg:#444444)
-[╰─────](bold cyan)$character"""
+$localip
+"""
 
 # 左右分割（右寄せ用）
 [fill]
@@ -139,54 +142,6 @@ format = "[ +$added]($added_style)[/-$deleted]($deleted_style)"
 added_style = "bg:#77aec9 fg:#585858"
 deleted_style = "bg:#77aec9 fg:#585858"
 
-# Node.js
-[nodejs]
-format = "[  $version ]($style)"
-symbol = ""
-style = "bg:#444444 fg:#7CFC00"
-detect_files = ["package.json"]
-detect_folders = ["node_modules"]
-
-# Python
-[python]
-format = "[  $version (${virtualenv}) ]($style)"
-symbol = ""
-style = "bg:#444444 fg:#FFD75F"
-detect_files = [".python-version", "Pipfile", "__pycache__", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
-detect_folders = []
-
-# Rust
-[rust]
-format = "[  $version ]($style)"
-symbol = ""
-style = "bg:#444444 fg:#FF5F5F"
-detect_files = ["Cargo.toml", "Cargo.lock"]
-detect_folders = []
-
-# Go
-[golang]
-format = "[  $version ]($style)"
-symbol = ""
-style = "bg:#444444 fg:#5FD7FF"
-detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock", ".go-version"]
-detect_folders = ["Godeps"]
-
-# Docker コンテキスト
-[docker_context]
-format = "[ $symbol$context ]($style)"
-symbol = "🐳 "
-style = "bg:#444444 fg:#5F87FF"
-only_with_files = true
-detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", ".dockerignore"]
-detect_folders = []
-
-# パッケージ情報（package.json など）
-[package]
-format = "[ $symbol$version ]($style)"
-symbol = "📦 "
-style = "bg:#444444 fg:#FFAF5F"
-display_private = false
-
 # 実行時間（1秒以上かかったコマンドのみ表示）
 [cmd_duration]
 min_time = 1_000
@@ -201,15 +156,63 @@ style = "bg:#444444 fg:#F2F2F2"
 use_12hr = false
 time_format = "%T"
 
+# Node.js
+[nodejs]
+format = "[   $version ]($style)"
+symbol = ""
+style = "fg:#7CFC00"
+detect_files = ["package.json"]
+detect_folders = ["node_modules"]
+
+# Python
+[python]
+format = "[   $version (${virtualenv}) ]($style)"
+symbol = ""
+style = "fg:#FFD75F"
+detect_files = [".python-version", "Pipfile", "__pycache__", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
+detect_folders = []
+
+# Rust
+[rust]
+format = "[   $version ]($style)"
+symbol = ""
+style = "fg:#FF5F5F"
+detect_files = ["Cargo.toml", "Cargo.lock"]
+detect_folders = []
+
+# Go
+[golang]
+format = "[   $version ]($style)"
+symbol = ""
+style = "fg:#5FD7FF"
+detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock", ".go-version"]
+detect_folders = ["Godeps"]
+
+# Docker コンテキスト
+[docker_context]
+format = "[  $symbol$context ]($style)"
+symbol = "🐳 "
+style = "fg:#5F87FF"
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile", ".dockerignore"]
+detect_folders = []
+
+# パッケージ情報（package.json など）
+[package]
+format = "[  $symbol$version ]($style)"
+symbol = "📦 "
+style = "fg:#FFAF5F"
+display_private = false
+
 # SSH時のローカルIP表示（必要なときだけ）
 [localip]
 ssh_only = true
-format = "[ 󰩟 $localipv4 ]($style)"
-style = "bg:#444444 fg:#CFCFCF"
+format = "[  󰩟 $localipv4 ]($style)"
+style = "fg:#CFCFCF"
 disabled = false
 
 # AWS（AWS_PROFILE があるときだけ profile を表示）
 [aws]
 disabled = false
-format = "[ 󰸏 $profile ]($style)"
-style = "bg:#444444 fg:#FFAF5F"
+format = "[  󰸏 $profile ]($style)"
+style = "fg:#FFAF5F"
