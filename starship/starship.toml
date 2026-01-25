@@ -32,6 +32,7 @@ $nodejs\
 $python\
 $rust\
 $golang\
+$terraform\
 $aws\
 $docker_context\
 $package\
@@ -189,12 +190,18 @@ style = "fg:#5FD7FF"
 detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock", ".go-version"]
 detect_folders = ["Godeps"]
 
+# Terraform
+[terraform]
+format = "[  󱁢 $version ($workspace) ]($style)"
+style = "fg:#7AA6FF"
+detect_extensions = ["tf", "tfvars", "tfplan", "tfstate", "hcl"]
+detect_files = ["terraform.tfstate", ".terraform.lock.hcl", "terragrunt.hcl"]
+
 # AWS（AWS_PROFILE があるときだけ profile を表示）
 [aws]
 disabled = false
 format = "[  󰸏 $profile ]($style)"
 style = "fg:#FFAF5F"
-
 
 # Docker コンテキスト
 [docker_context]
