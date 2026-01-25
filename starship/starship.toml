@@ -168,7 +168,7 @@ detect_folders = ["node_modules"]
 
 # Python
 [python]
-format = "[   $version (${virtualenv}) ]($style)"
+format = "[   $version (${virtualenv})]($style)"
 symbol = ""
 style = "fg:#FFD75F"
 detect_files = [".python-version", "Pipfile", "__pycache__", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
@@ -176,7 +176,7 @@ detect_folders = []
 
 # Rust
 [rust]
-format = "[   $version ]($style)"
+format = "[   $version]($style)"
 symbol = ""
 style = "fg:#FF5F5F"
 detect_files = ["Cargo.toml", "Cargo.lock"]
@@ -184,7 +184,7 @@ detect_folders = []
 
 # Go
 [golang]
-format = "[   $version ]($style)"
+format = "[   $version]($style)"
 symbol = ""
 style = "fg:#5FD7FF"
 detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock", ".go-version"]
@@ -200,12 +200,12 @@ detect_files = ["terraform.tfstate", ".terraform.lock.hcl", "terragrunt.hcl"]
 # AWS（AWS_PROFILE があるときだけ profile を表示）
 [aws]
 disabled = false
-format = "[  󰸏 $profile ]($style)"
+format = "[  󰸏 $profile]($style)"
 style = "fg:#FFAF5F"
 
 # Docker コンテキスト
 [docker_context]
-format = "[  $symbol$context ]($style)"
+format = "[  $symbol$context]($style)"
 symbol = " "
 style = "fg:#5F87FF"
 only_with_files = true
@@ -214,7 +214,7 @@ detect_folders = []
 
 # パッケージ情報（package.json など）
 [package]
-format = "[  $symbol$version ]($style)"
+format = "[  $symbol$version]($style)"
 symbol = "󰏗 "
 style = "fg:#FFAF5F"
 display_private = false
@@ -222,6 +222,6 @@ display_private = false
 # SSH時のローカルIP表示（必要なときだけ）
 [localip]
 ssh_only = true
-format = "[  󰩟 $localipv4 ]($style)"
+format = "[  󰩟 $localipv4]($style)"
 style = "fg:#CFCFCF"
 disabled = false
