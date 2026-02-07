@@ -161,3 +161,6 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 source /Users/canale/.config/broot/launcher/bash/br
+
+# Added by Antigravity
+export PATH="/Users/canale/.antigravity/antigravity/bin:$PATH"
