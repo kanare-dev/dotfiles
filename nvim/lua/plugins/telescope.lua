@@ -6,6 +6,36 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
+    keys = {
+      {
+        "<leader>ff",
+        function()
+          require("telescope.builtin").find_files()
+        end,
+        desc = "Find files",
+      },
+      {
+        "<leader>fg",
+        function()
+          require("telescope.builtin").live_grep()
+        end,
+        desc = "Live grep",
+      },
+      {
+        "<leader>fb",
+        function()
+          require("telescope.builtin").buffers()
+        end,
+        desc = "Buffers",
+      },
+      {
+        "<leader>fh",
+        function()
+          require("telescope.builtin").help_tags()
+        end,
+        desc = "Help tags",
+      },
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       {
@@ -30,16 +60,6 @@ return {
       })
 
       pcall(telescope.load_extension, "fzf")
-
-      local builtin = require("telescope.builtin")
-      local map = function(lhs, rhs, desc)
-        vim.keymap.set("n", lhs, rhs, { silent = true, desc = desc })
-      end
-
-      map("<leader>ff", builtin.find_files, "Find files")
-      map("<leader>fg", builtin.live_grep, "Live grep")
-      map("<leader>fb", builtin.buffers, "Buffers")
-      map("<leader>fh", builtin.help_tags, "Help tags")
     end,
   },
 }

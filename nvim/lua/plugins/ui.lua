@@ -7,6 +7,7 @@ return {
       local wk = require("which-key")
       wk.setup(opts)
       wk.add({
+        { "<leader>e", group = "explorer" },
         { "<leader>f", group = "find" },
         { "<leader>h", group = "git hunk" },
       })
