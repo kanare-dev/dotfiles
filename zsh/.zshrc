@@ -160,7 +160,14 @@ if command -v brew >/dev/null 2>&1; then
   fi
 fi
 
-source /Users/canale/.config/broot/launcher/bash/br
+source "$HOME/.config/broot/launcher/bash/br"
 
 # Added by Antigravity
-export PATH="/Users/canale/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
