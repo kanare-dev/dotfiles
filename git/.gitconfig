@@ -46,6 +46,7 @@
   cm  = commit -m
   d   = diff
   ds  = diff --staged
+  p   = push
   # sync: fetch→(未pushコミットがあればバックアップブランチ作成)→rebase @{u}
   # - backup/<branch>-YYYYMMDD-HHMMSS を作るので、rebase で迷子になっても戻れます
   # - upstream が無い場合は案内して終了します
