@@ -4,8 +4,8 @@
 
 # Core Git settings
 [core]
-  # Use VS Code as the default editor
-  editor = code --wait
+  # Use Neovim as the default editor
+  editor = nvim
   # Use delta as the pager for git diff/log
   pager = delta
   # Global gitignore file location
