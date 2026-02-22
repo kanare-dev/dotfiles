@@ -83,7 +83,7 @@
 [user]
 	name = kanare-dev
 	email = me@kanare.dev
-	signingkey = ~/.ssh/id_ed25519.pub
+	signingkey = ~/.ssh/id_ed25519_github.pub
 
 # Commit signing (GitHub "Verified") via SSH keys
 [gpg]
