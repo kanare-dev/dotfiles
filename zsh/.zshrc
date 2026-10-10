@@ -100,6 +100,15 @@ alias cdp='cd ~/Projects'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+# ディレクトリを作って即移動（-p で中間ディレクトリもまとめて作成）
+# 引数は1つだけ受け付ける（スペースを含む名前はクォートする。誤入力は黙って通さずエラーにする）
+mkcd() {
+  if (( $# != 1 )); then
+    print -u2 "usage: mkcd <dir>"
+    return 1
+  fi
+  mkdir -p -- "$1" && cd -- "$1"
+}
 
 # --- ファイル一覧表示 ---
 alias ll='ls -l'
