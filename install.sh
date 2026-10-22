@@ -131,6 +131,10 @@ create_symlink "$DOTFILES_DIR/ghostty/config" "$HOME/Library/Application Support
 mkdir -p "$HOME/.config/ghostty"
 create_symlink "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
+# VSCode
+mkdir -p "$HOME/Library/Application Support/Code/User"
+create_symlink "$DOTFILES_DIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+
 if [[ -d "$BACKUP_DIR" ]]; then
     echo ""
     echo "📦 バックアップは $BACKUP_DIR に保存されました。"

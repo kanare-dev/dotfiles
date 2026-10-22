@@ -17,6 +17,7 @@
 - **claude**: Claude Code のユーザー設定 (`~/.claude/settings.json`) とグローバル指示 (`~/.claude/CLAUDE.md`)
 - **ccstatusline**: Claude Code ステータスライン設定 (`~/.config/ccstatusline/settings.json`)
 - **ghostty**: Ghostty ターミナル設定 (`~/Library/Application Support/com.mitchellh.ghostty/config`)
+- **vscode**: VSCode のユーザー設定 (`~/Library/Application Support/Code/User/settings.json`)
 
 ## git のローカル分離（推奨）
 
@@ -76,6 +77,8 @@ dotfiles/
 │   └── settings.json
 ├── ghostty/
 │   └── config
+├── vscode/
+│   └── settings.json
 ├── install.sh
 ├── uninstall.sh
 └── README.md
@@ -90,6 +93,11 @@ dotfiles/
 - `history.jsonl` / `projects/` / `sessions/` / `shell-snapshots/` などの会話履歴・実行時データ
 - `plugins/` / `skills/skill-creator` など、marketplace からインストールされる/同梱される生成物
 - `~/.claude.json`（MCPサーバー設定やプロジェクト固有情報を含み、マシン間で共有すべきでない）
+
+## VSCode の設定について
+
+`settings.json` のみを管理対象としています。Settings Sync と併用する場合は、
+衝突を避けるため Settings Sync の「設定」項目をオフにしてください。
 
 ## 注意事項
 

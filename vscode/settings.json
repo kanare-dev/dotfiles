@@ -1,0 +1,87 @@
+{
+  // ========================================
+  // Editor
+  // ========================================
+  // エディタのフォント(ターミナルとそろえる)
+  "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  // 保存時に自動整形
+  "editor.formatOnSave": true,
+  // ミニマップを非表示
+  "editor.minimap.enabled": false,
+
+  // ========================================
+  // Explorer
+  // ========================================
+  // ファイル削除時の確認ダイアログを出さない
+  "explorer.confirmDelete": false,
+  // OSのファイルをペーストする際の確認ダイアログを出さない
+  "explorer.confirmPasteNative": false,
+
+  // ========================================
+  // Files
+  // ========================================
+  // 一定時間後に自動保存
+  "files.autoSave": "afterDelay",
+  // エクスプローラーから.DS_Storeを非表示
+  "files.exclude": {
+    "**/.DS_Store": true
+  },
+  // ファイル末尾に改行を挿入
+  "files.insertFinalNewline": true,
+  // 行末の空白を削除
+  "files.trimTrailingWhitespace": true,
+
+  // ========================================
+  // Git
+  // ========================================
+  // 定期的にリモートを自動fetch
+  "git.autofetch": true,
+  // 同期(push/pull)時の確認ダイアログを出さない
+  "git.confirmSync": false,
+
+  // ========================================
+  // Security
+  // ========================================
+  // ワークスペースの信頼確認(Workspace Trust)を無効化
+  "security.workspace.trust.enabled": false,
+
+  // ========================================
+  // Terminal
+  // ========================================
+  // 既定のシェルをzshに固定
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  // Nerd Fontを優先し、なければ等幅フォントにフォールバック
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+
+  // ========================================
+  // Window
+  // ========================================
+  // OSの外観設定に合わせてライト/ダークを自動切り替え
+  "window.autoDetectColorScheme": true,
+
+  // ========================================
+  // Workbench
+  // ========================================
+  // アクティビティバーを上部に表示
+  "workbench.activityBar.location": "top",
+  "workbench.iconTheme": "vscode-icons",
+  // 自動切り替え時のテーマ(ダーク/ライト)
+  "workbench.preferredDarkColorTheme": "One Dark Pro",
+  "workbench.preferredLightColorTheme": "GitHub Light",
+
+  // ========================================
+  // Language-specific
+  // ========================================
+  // JSONはPrettierで整形
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ========================================
+  // Extensions: Claude Code
+  // ========================================
+  // オンボーディング表示を非表示
+  "claudeCode.hideOnboarding": true,
+  // Claude Codeをサイドバーに表示
+  "claudeCode.preferredLocation": "sidebar",
+}
