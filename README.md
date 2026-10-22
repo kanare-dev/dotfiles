@@ -98,6 +98,8 @@ dotfiles/
 
 `settings.json` のみを管理対象としています。Settings Sync と併用する場合は、
 衝突を避けるため Settings Sync の「設定」項目をオフにしてください。
+この切り替えは `settings.json` では指定できないため、コマンドパレットの
+`Settings Sync: Configure...` から手動で行います。
 
 ## 注意事項
 
