@@ -77,7 +77,7 @@
 [user]
 	name = kanare-dev
 	email = me@kanare.dev
-	signingkey = /Users/canale/.ssh/id_ed25519_git_signing.pub
+	signingkey = ~/.ssh/id_ed25519_git_signing.pub
 
 # Commit signing (GitHub "Verified") via SSH keys
 [gpg]
@@ -95,7 +95,7 @@
 	auto = false
 [credential "https://github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
