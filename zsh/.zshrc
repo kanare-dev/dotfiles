@@ -57,6 +57,9 @@ if command -v fzf >/dev/null 2>&1; then
     FZF_BASE="$(brew --prefix)/opt/fzf"
     [[ -f "$FZF_BASE/shell/completion.zsh" ]] && source "$FZF_BASE/shell/completion.zsh"
     [[ -f "$FZF_BASE/shell/key-bindings.zsh" ]] && source "$FZF_BASE/shell/key-bindings.zsh"
+  else
+    # Linux (apt 等): fzf 0.48+ は自身がシェル統合を出力する
+    source <(fzf --zsh 2>/dev/null) 2>/dev/null
   fi
 fi
 
@@ -174,17 +177,20 @@ fi
 # ============================================================
 # zsh-autosuggestions: 入力補完を提案してくれる
 # zsh-syntax-highlighting: コマンドの構文を色付け表示
-# - Homebrew でインストールされている場合のみ有効化
+# - Homebrew (macOS) または apt (/usr/share) でインストールされている場合のみ有効化
 # - 存在しない場合はスキップ（エラーにならない）
-if command -v brew >/dev/null 2>&1; then
-  BREW_PREFIX="$(brew --prefix)"
-  if [[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+ZSH_PLUGIN_DIRS=(/usr/share)
+command -v brew >/dev/null 2>&1 && ZSH_PLUGIN_DIRS=("$(brew --prefix)/share" $ZSH_PLUGIN_DIRS)
+
+for _dir in $ZSH_PLUGIN_DIRS; do
+  if [[ -f "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
     # デフォルトのANSIグレーはテーマの背景色と被って見づらいことがあるため、
     # TokyoNight のコメント色を直指定して視認性を確保する
     ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#565f89'
-    source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    source "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    break
   fi
-fi
+done
 
 # ============================================================
 # zoxide（ディレクトリ移動補助）
@@ -197,14 +203,15 @@ if command -v zoxide >/dev/null 2>&1; then
 fi
 
 # zsh-syntax-highlighting はできるだけ最後に読むのが推奨
-if command -v brew >/dev/null 2>&1; then
-  BREW_PREFIX="$(brew --prefix)"
-  if [[ -f "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
-    source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+for _dir in $ZSH_PLUGIN_DIRS; do
+  if [[ -f "$_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+    source "$_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    break
   fi
-fi
+done
+unset _dir
 
-source "$HOME/.config/broot/launcher/bash/br"
+[[ -f "$HOME/.config/broot/launcher/bash/br" ]] && source "$HOME/.config/broot/launcher/bash/br"
 
 # Added by Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
