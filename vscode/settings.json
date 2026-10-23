@@ -86,4 +86,9 @@
   // Claude Codeをサイドバーに表示
   "claudeCode.preferredLocation": "sidebar",
   "claudeCode.useTerminal": true,
+
+  // ========================================
+  // Extensions: Remote - SSH
+  // ========================================
+  "remote.SSH.configFile": "${userHome}/.ssh/config_vscode",
 }
