@@ -3,6 +3,7 @@ set -euo pipefail
 
 # スクリプトの位置からDOTFILES_DIRを解決
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+OS="$(uname -s)"
 
 # 削除対象のシンボリックリンク
 SYMLINKS=(
@@ -17,10 +18,18 @@ SYMLINKS=(
     "$HOME/.claude/hooks/markdownlint.sh"
     "$HOME/.markdownlint-cli2.jsonc"
     "$HOME/.config/ccstatusline/settings.json"
-    "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
     "$HOME/.config/ghostty/config"
-    "$HOME/Library/Application Support/Code/User/settings.json"
 )
+
+# OS ごとに配置先が異なるもの
+if [[ "$OS" == "Darwin" ]]; then
+    SYMLINKS+=(
+        "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+        "$HOME/Library/Application Support/Code/User/settings.json"
+    )
+else
+    SYMLINKS+=("$HOME/.config/Code/User/settings.json")
+fi
 
 # シンボリックリンクを削除する関数
 remove_symlink() {

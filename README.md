@@ -17,8 +17,8 @@
 - **claude**: Claude Code のユーザー設定 (`~/.claude/settings.json`)、グローバル指示 (`~/.claude/CLAUDE.md`)、Markdown 編集後に markdownlint を走らせるフック (`~/.claude/hooks/markdownlint.sh`)
 - **markdownlint**: markdownlint-cli2 のグローバル設定 (`~/.markdownlint-cli2.jsonc`、MD013 を無効化)
 - **ccstatusline**: Claude Code ステータスライン設定 (`~/.config/ccstatusline/settings.json`)
-- **ghostty**: Ghostty ターミナル設定 (`~/Library/Application Support/com.mitchellh.ghostty/config`)
-- **vscode**: VSCode のユーザー設定 (`~/Library/Application Support/Code/User/settings.json`)
+- **ghostty**: Ghostty ターミナル設定 (macOS: `~/Library/Application Support/com.mitchellh.ghostty/config`、共通: `~/.config/ghostty/config`)
+- **vscode**: VSCode のユーザー設定 (macOS: `~/Library/Application Support/Code/User/settings.json`、Linux: `~/.config/Code/User/settings.json`)
 
 ## git のローカル分離（推奨）
 
@@ -36,7 +36,7 @@ cp ./git/.gitconfig.local.example ~/.gitconfig.local
 以下のツールのインストールを推奨します（インストールスクリプトがチェックします）:
 
 - **starship**: `curl -sS https://starship.rs/install.sh | sh`
-- **fzf**: `brew install fzf`
+- **fzf**: `brew install fzf`（Linux は `sudo apt install fzf`）
 
 ## インストール方法
 

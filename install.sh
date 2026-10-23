@@ -5,6 +5,9 @@ set -euo pipefail
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKUP_DIR="$HOME/.dotfiles_backup_$(date +%Y%m%d_%H%M%S)"
 
+# OS 判定（macOS 専用の配置先を切り替える）
+OS="$(uname -s)"
+
 # バックアップのmanifest（元のパスを復元するため）
 MANIFEST_FILE="$BACKUP_DIR/.manifest"
 
@@ -28,7 +31,11 @@ check_prerequisites() {
         echo ""
         echo "インストール方法:"
         echo "  starship: curl -sS https://starship.rs/install.sh | sh"
-        echo "  fzf: brew install fzf"
+        if [[ "$OS" == "Darwin" ]]; then
+            echo "  fzf: brew install fzf"
+        else
+            echo "  fzf: sudo apt install fzf  (または git clone https://github.com/junegunn/fzf)"
+        fi
         echo ""
         read -p "続行しますか? (y/N): " -n 1 -r
         echo
@@ -129,16 +136,23 @@ create_symlink "$DOTFILES_DIR/ccstatusline/settings.json" "$HOME/.config/ccstatu
 
 # Ghostty
 # macOS では Application Support 配下が優先されるが、XDG (~/.config/ghostty) も
-# フォールバックとして読まれるため両方にリンクしておく
-mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
-create_symlink "$DOTFILES_DIR/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+# フォールバックとして読まれるため両方にリンクしておく（Linux は XDG のみ）
+if [[ "$OS" == "Darwin" ]]; then
+    mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
+    create_symlink "$DOTFILES_DIR/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+fi
 
 mkdir -p "$HOME/.config/ghostty"
 create_symlink "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
 # VSCode
-mkdir -p "$HOME/Library/Application Support/Code/User"
-create_symlink "$DOTFILES_DIR/vscode/settings.json" "$HOME/Library/Application Support/Code/User/settings.json"
+if [[ "$OS" == "Darwin" ]]; then
+    VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+else
+    VSCODE_USER_DIR="$HOME/.config/Code/User"
+fi
+mkdir -p "$VSCODE_USER_DIR"
+create_symlink "$DOTFILES_DIR/vscode/settings.json" "$VSCODE_USER_DIR/settings.json"
 
 if [[ -d "$BACKUP_DIR" ]]; then
     echo ""
