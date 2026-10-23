@@ -24,7 +24,7 @@
   "files.autoSave": "afterDelay",
   // エクスプローラーから.DS_Storeを非表示
   "files.exclude": {
-    "**/.DS_Store": true
+    "**/.DS_Store": true,
   },
   // ファイル末尾に改行を挿入
   "files.insertFinalNewline": true,
@@ -68,13 +68,14 @@
   // 自動切り替え時のテーマ(ダーク/ライト)
   "workbench.preferredDarkColorTheme": "One Dark Pro",
   "workbench.preferredLightColorTheme": "GitHub Light",
+  "workbench.startupEditor": "none",
 
   // ========================================
   // Language-specific
   // ========================================
   // JSONはPrettierで整形
   "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
 
   // ========================================
@@ -84,4 +85,5 @@
   "claudeCode.hideOnboarding": true,
   // Claude Codeをサイドバーに表示
   "claudeCode.preferredLocation": "sidebar",
+  "claudeCode.useTerminal": true,
 }
