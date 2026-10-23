@@ -15,6 +15,7 @@
 - **starship**: プロンプトカスタマイズ設定 (`starship.toml`)
 - **nvim**: Neovim 設定 (`~/.config/nvim`)
 - **claude**: Claude Code のユーザー設定 (`~/.claude/settings.json`)、グローバル指示 (`~/.claude/CLAUDE.md`)、Markdown 編集後に markdownlint を走らせるフック (`~/.claude/hooks/markdownlint.sh`)
+- **markdownlint**: markdownlint-cli2 のグローバル設定 (`~/.markdownlint-cli2.jsonc`、MD013 を無効化)
 - **ccstatusline**: Claude Code ステータスライン設定 (`~/.config/ccstatusline/settings.json`)
 - **ghostty**: Ghostty ターミナル設定 (`~/Library/Application Support/com.mitchellh.ghostty/config`)
 - **vscode**: VSCode のユーザー設定 (`~/Library/Application Support/Code/User/settings.json`)
@@ -75,6 +76,8 @@ dotfiles/
 │   ├── CLAUDE.md
 │   └── hooks/
 │       └── markdownlint.sh
+├── markdownlint/
+│   └── .markdownlint-cli2.jsonc
 ├── ccstatusline/
 │   └── settings.json
 ├── ghostty/

@@ -9,7 +9,12 @@ file="$(jq -r '.tool_input.file_path // empty')"
 [[ -f "$file" ]] || exit 0
 
 # --fix で自動修正し、直せなかった警告だけが出力に残る
-if ! output="$(bunx -y markdownlint-cli2 --fix "$file" 2>&1)"; then
+# 設定の探索は cwd までで止まるため、グローバル設定は --config でベースとして渡す
+# （プロジェクト側の .markdownlint-cli2.jsonc があればそちらが優先される）
+args=(--fix)
+[[ -f "$HOME/.markdownlint-cli2.jsonc" ]] && args+=(--config "$HOME/.markdownlint-cli2.jsonc")
+
+if ! output="$(bunx -y markdownlint-cli2 "${args[@]}" "$file" 2>&1)"; then
     # exit 2 + stderr で Claude に警告がフィードバックされる
     echo "markdownlint の警告が残っています。修正してください:" >&2
     echo "$output" >&2

@@ -120,6 +120,9 @@ create_symlink "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 mkdir -p "$HOME/.claude/hooks"
 create_symlink "$DOTFILES_DIR/claude/hooks/markdownlint.sh" "$HOME/.claude/hooks/markdownlint.sh"
 
+# markdownlint (Claude Code の markdownlint フックが参照するグローバル設定)
+create_symlink "$DOTFILES_DIR/markdownlint/.markdownlint-cli2.jsonc" "$HOME/.markdownlint-cli2.jsonc"
+
 # ccstatusline
 mkdir -p "$HOME/.config/ccstatusline"
 create_symlink "$DOTFILES_DIR/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
