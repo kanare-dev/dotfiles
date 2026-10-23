@@ -5,11 +5,6 @@
     "command": "bunx -y ccstatusline@2.2.23",
     "padding": 0
   },
-  "enabledPlugins": {
-    "commit-commands@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "frontend-design@claude-plugins-official": true
-  },
   "hooks": {
     "PostToolUse": [
       {
@@ -22,6 +17,20 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "commit-commands@claude-plugins-official": true,
+    "figma@claude-plugins-official": true,
+    "frontend-design@claude-plugins-official": true,
+    "drawio@drawio": true
+  },
+  "extraKnownMarketplaces": {
+    "drawio": {
+      "source": {
+        "source": "github",
+        "repo": "jgraph/drawio-mcp"
+      }
+    }
   },
   "tui": "fullscreen",
   "agentPushNotifEnabled": true
