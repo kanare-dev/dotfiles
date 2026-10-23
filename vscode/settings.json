@@ -64,6 +64,8 @@
   // ========================================
   // アクティビティバーを上部に表示
   "workbench.activityBar.location": "top",
+  // エディタのアクションボタンをタイトルバーに表示
+  "workbench.editor.editorActionsLocation": "titleBar",
   "workbench.iconTheme": "vscode-icons",
   // 自動切り替え時のテーマ(ダーク/ライト)
   "workbench.preferredDarkColorTheme": "One Dark Pro",
@@ -76,6 +78,10 @@
   // JSONはPrettierで整形
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  // Markdownはmarkdownlintで整形
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint",
   },
 
   // ========================================
