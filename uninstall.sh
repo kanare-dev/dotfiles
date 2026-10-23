@@ -14,6 +14,7 @@ SYMLINKS=(
     "$HOME/.config/nvim"
     "$HOME/.claude/settings.json"
     "$HOME/.claude/CLAUDE.md"
+    "$HOME/.claude/hooks/markdownlint.sh"
     "$HOME/.config/ccstatusline/settings.json"
     "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
     "$HOME/.config/ghostty/config"

@@ -14,7 +14,7 @@
 - **git**: `.gitconfig` と `.gitignore_global` 設定ファイル
 - **starship**: プロンプトカスタマイズ設定 (`starship.toml`)
 - **nvim**: Neovim 設定 (`~/.config/nvim`)
-- **claude**: Claude Code のユーザー設定 (`~/.claude/settings.json`) とグローバル指示 (`~/.claude/CLAUDE.md`)
+- **claude**: Claude Code のユーザー設定 (`~/.claude/settings.json`)、グローバル指示 (`~/.claude/CLAUDE.md`)、Markdown 編集後に markdownlint を走らせるフック (`~/.claude/hooks/markdownlint.sh`)
 - **ccstatusline**: Claude Code ステータスライン設定 (`~/.config/ccstatusline/settings.json`)
 - **ghostty**: Ghostty ターミナル設定 (`~/Library/Application Support/com.mitchellh.ghostty/config`)
 - **vscode**: VSCode のユーザー設定 (`~/Library/Application Support/Code/User/settings.json`)
@@ -72,7 +72,9 @@ dotfiles/
 │   └── starship.toml
 ├── claude/
 │   ├── settings.json
-│   └── CLAUDE.md
+│   ├── CLAUDE.md
+│   └── hooks/
+│       └── markdownlint.sh
 ├── ccstatusline/
 │   └── settings.json
 ├── ghostty/

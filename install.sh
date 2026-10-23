@@ -117,6 +117,8 @@ create_symlink "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 mkdir -p "$HOME/.claude"
 create_symlink "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 create_symlink "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+mkdir -p "$HOME/.claude/hooks"
+create_symlink "$DOTFILES_DIR/claude/hooks/markdownlint.sh" "$HOME/.claude/hooks/markdownlint.sh"
 
 # ccstatusline
 mkdir -p "$HOME/.config/ccstatusline"

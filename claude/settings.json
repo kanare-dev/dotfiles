@@ -10,6 +10,19 @@
     "figma@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true
   },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.claude/hooks/markdownlint.sh\""
+          }
+        ]
+      }
+    ]
+  },
   "tui": "fullscreen",
   "agentPushNotifEnabled": true
 }
