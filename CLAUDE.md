@@ -32,7 +32,7 @@ bash -n install.sh uninstall.sh   # スクリプト変更後の構文チェッ�
 
 バックアップは `$HOME` からの相対パスを保持して保存され、`.manifest` に記録される。`uninstall.sh` の復元はこの manifest を前提にする（manifest が無い旧形式への互換コードもある）。
 
-ツール自体（コマンドや GUI アプリ）を新しく入れたときは、設定管理とは別に `Brewfile` へ追記する（カテゴリ分けと説明コメントに合わせる。cask は `if OS.mac?` 内）。Brewfile はリンクせず `brew bundle` で使う。
+ツール自体（コマンドや GUI アプリ）を新しく入れたときは、設定管理とは別に Brewfile へ追記する（カテゴリ分けと説明コメントに合わせる）。全マシン（Linux VM を含む）で使うものは `Brewfile`、重いもの・インフラ/ドキュメント系・macOS 専用の GUI アプリ（cask は `if OS.mac?` 内）は `Brewfile.extra`。どちらもリンクせず `brew bundle` で使う。
 
 ## 規約
 

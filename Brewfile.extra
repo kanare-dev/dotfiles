@@ -1,0 +1,51 @@
+# Brewfile.extra
+#
+# 思想: 全マシンには要らないツールの置き場。Brewfile（共通セット）に加えて、必要なマシンだけで流す。
+# - ソースビルドになりやすく重いもの（go / node / ansible など）、インフラ・ドキュメント系、macOS 専用の GUI アプリ
+# - 書き方は Brewfile に合わせる（カテゴリ分けと説明コメント。cask は `if OS.mac?` 内）
+#
+#   brew bundle --file=Brewfile.extra
+
+tap "hashicorp/tap"
+
+# ==== コマンドの置き換え・ファイル操作 ====
+brew "glow"                     # Markdown をターミナルで整形表示するビューア
+
+# ==== TUI ツール ====
+brew "k9s"                      # Kubernetes クラスタをターミナルで操作・監視する TUI
+
+# ==== 言語・ランタイム ====
+brew "go"                       # Go 言語の処理系
+brew "node"                     # JavaScript ランタイム（npm 同梱）
+
+# ==== インフラ・クラウド ====
+brew "awscli"                   # AWS 公式のコマンドラインインターフェース
+brew "ansible"                  # SSH 経由でサーバー構成を自動化する構成管理ツール（エージェント不要）
+brew "ansible-lint"             # Ansible の playbook をベストプラクティスに沿って静的解析
+brew "yamllint"                 # YAML の構文・書式チェッカー
+brew "hashicorp/tap/terraform"  # インフラをコードで宣言して構築・管理する IaC ツール
+brew "argocd"                   # Kubernetes 向け GitOps 継続的デリバリーの CLI
+brew "kubernetes-cli"           # kubectl: Kubernetes クラスタを操作する公式 CLI
+brew "kind"                     # Docker コンテナ内にローカルの Kubernetes クラスタを作る
+
+# ==== ネットワーク ====
+brew "wireguard-tools"          # wg / wg-quick: WireGuard（軽量な VPN）の設定・起動
+
+# ==== ドキュメント ====
+brew "pandoc"                   # Markdown・HTML・docx など多数の文書形式を相互変換
+brew "typst"                    # Markdown 風の記法で書ける、LaTeX の代替となる組版システム
+
+# ==== macOS 専用 (GUI アプリ・フォント) ====
+if OS.mac?
+  cask "cmux"                           # Ghostty ベースのターミナル（縦タブ、AI コーディングエージェント向けの通知）
+  cask "drawio"                         # フローチャートや構成図を描くダイアグラムエディタ
+  cask "font-jetbrains-mono-nerd-font"  # JetBrains Mono にアイコン用グリフを加えたフォント（eza --icons で使用）
+  cask "iterm2"                         # macOS 標準 Terminal の代替となる高機能ターミナル
+  cask "macvim-app"                     # macOS ネイティブ GUI の Vim
+  cask "supercollider"                  # 音響合成・アルゴリズミック作曲のためのサーバー・言語・IDE
+  cask "warp"                           # Rust 製のモダンなターミナル（コマンド単位のブロック表示）
+  cask "wireshark-app"                  # ネットワークパケットを解析するプロトコルアナライザ
+end
+
+# ==== Brew 管理外 (手動で入れたもの) ====
+# Claude Code / Ghostty / VSCode など公式インストーラ・dmg で入れたもの

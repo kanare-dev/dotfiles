@@ -1,13 +1,18 @@
 # Brewfile
 #
 # 思想: 入れたツールの台帳を兼ねる。`brew leaves` 相当（明示的に入れたもの）だけを書き、
-# 依存で入ったものは書かない。macOS 専用（cask）は OS.mac? で囲み、Linux (Linuxbrew) でも流用できるようにする。
+# 依存で入ったものは書かない。macOS 専用（cask）は Brewfile.extra に置く。
 # 行末コメントには「何のツールか・どんな特徴か」を1行で書く（コマンド名がパッケージ名と違うものは `cmd:` で示す）。
 #
-#   brew bundle --file=Brewfile            # 一括インストール
-#   brew bundle cleanup --file=Brewfile    # Brewfile に無いものを確認（--force で削除）
+# このファイルは全マシン共通の最小セット（Linux VM でも入れる）。
+# 手元の Mac など、重いツールや GUI アプリまで入れるマシンは Brewfile.extra も追加で流す。
+#
+#   brew bundle --file=Brewfile            # 共通セットを一括インストール
+#   brew bundle --file=Brewfile.extra      # 追加セット（必要なマシンだけ）
+#
+# `brew bundle cleanup` は両方のファイルを合わせて確認する（片方だけだと、もう片方のツールが削除候補に出る）:
+#   cat Brewfile Brewfile.extra | brew bundle cleanup --file=-
 
-tap "hashicorp/tap"
 tap "rjyo/moshi"
 
 # ==== シェル・プロンプト ====
@@ -26,7 +31,6 @@ brew "fd"                       # 簡潔な構文で高速な find の代替（.
 brew "ripgrep"                  # rg: 高速な再帰 grep の代替（.gitignore を尊重）
 brew "dust"                     # du の代替（ディレクトリごとの容量を棒グラフ付きツリーで表示）
 brew "jq"                       # コマンドラインの JSON 処理・整形ツール
-brew "glow"                     # Markdown をターミナルで整形表示するビューア
 brew "wget"                     # URL からファイルを取得する HTTP / FTP ダウンローダ
 brew "watch"                    # コマンドを一定間隔で繰り返し実行し、出力を更新表示
 brew "watchexec"                # ファイルの変更を検知してコマンドを自動で再実行
@@ -41,7 +45,6 @@ brew "lazygit"                  # git 操作をキーで行えるターミナル
 brew "bottom"                   # btm: CPU・メモリ・プロセスをグラフで見るシステムモニタ
 brew "btop"                     # CPU・メモリ・ディスク・ネットワークを一画面で見るリソースモニタ
 brew "htop"                     # top の改良版。対話的に操作できるプロセスビューア
-brew "k9s"                      # Kubernetes クラスタをターミナルで操作・監視する TUI
 brew "fastfetch"                # OS やハードウェアの情報を見栄え良く表示（neofetch の高速な後継）
 
 # ==== Git・セキュリティ ====
@@ -55,28 +58,11 @@ brew "sops"                     # YAML / JSON の値だけを暗号化して管�
 
 # ==== 言語・ランタイム ====
 brew "bun"                      # 高速な JavaScript ランタイム（バンドラ・テスト・パッケージ管理を内蔵）
-brew "go"                       # Go 言語の処理系
-brew "node"                     # JavaScript ランタイム（npm 同梱）
 brew "uv"                       # Rust 製の高速な Python パッケージ・プロジェクト・バージョン管理（pyenv の代替）
-
-# ==== インフラ・クラウド ====
-brew "awscli"                   # AWS 公式のコマンドラインインターフェース
-brew "ansible"                  # SSH 経由でサーバー構成を自動化する構成管理ツール（エージェント不要）
-brew "ansible-lint"             # Ansible の playbook をベストプラクティスに沿って静的解析
-brew "yamllint"                 # YAML の構文・書式チェッカー
-brew "hashicorp/tap/terraform"  # インフラをコードで宣言して構築・管理する IaC ツール
-brew "argocd"                   # Kubernetes 向け GitOps 継続的デリバリーの CLI
-brew "kubernetes-cli"           # kubectl: Kubernetes クラスタを操作する公式 CLI
-brew "kind"                     # Docker コンテナ内にローカルの Kubernetes クラスタを作る
 
 # ==== ネットワーク ====
 brew "mosh"                     # 回線切断や IP 変更に強い、SSH の代替となるリモートシェル
-brew "wireguard-tools"          # wg / wg-quick: WireGuard（軽量な VPN）の設定・起動
 brew "rjyo/moshi/moshi-hook"    # AI コーディングエージェントと Moshi モバイルアプリを中継するデーモン + CLI
-
-# ==== ドキュメント ====
-brew "pandoc"                   # Markdown・HTML・docx など多数の文書形式を相互変換
-brew "typst"                    # Markdown 風の記法で書ける、LaTeX の代替となる組版システム
 
 # ==== 遊び ====
 brew "cmatrix"                  # マトリックス風の緑の文字が降る画面を表示
@@ -85,18 +71,3 @@ brew "fortune"                  # 実行するたびにランダムな格言を�
 brew "lolcat"                   # 出力を虹色に着色（例: fortune | lolcat）
 brew "sl"                       # ls を打ち間違える（sl）と蒸気機関車が走る
 brew "toilet"                   # 大きな文字や色付きの ASCII アートを出力（figlet 風）
-
-# ==== macOS 専用 (GUI アプリ・フォント) ====
-if OS.mac?
-  cask "cmux"                           # Ghostty ベースのターミナル（縦タブ、AI コーディングエージェント向けの通知）
-  cask "drawio"                         # フローチャートや構成図を描くダイアグラムエディタ
-  cask "font-jetbrains-mono-nerd-font"  # JetBrains Mono にアイコン用グリフを加えたフォント（eza --icons で使用）
-  cask "iterm2"                         # macOS 標準 Terminal の代替となる高機能ターミナル
-  cask "macvim-app"                     # macOS ネイティブ GUI の Vim
-  cask "supercollider"                  # 音響合成・アルゴリズミック作曲のためのサーバー・言語・IDE
-  cask "warp"                           # Rust 製のモダンなターミナル（コマンド単位のブロック表示）
-  cask "wireshark-app"                  # ネットワークパケットを解析するプロトコルアナライザ
-end
-
-# ==== Brew 管理外 (手動で入れたもの) ====
-# Claude Code / Ghostty / VSCode など公式インストーラ・dmg で入れたもの

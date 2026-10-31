@@ -20,7 +20,7 @@
 - **ghostty**: Ghostty ターミナル設定 (macOS: `~/Library/Application Support/com.mitchellh.ghostty/config`、共通: `~/.config/ghostty/config`)
 - **fastfetch**: fastfetch の表示設定 (`~/.config/fastfetch/config.jsonc`、Nerd Font アイコン付きの項目名)
 - **vscode**: VSCode のユーザー設定 (macOS: `~/Library/Application Support/Code/User/settings.json`、Linux: `~/.config/Code/User/settings.json`)
-- **Brewfile**: 入れているツールの台帳（リンクはせず `brew bundle` で使う。cask は macOS のみ）
+- **Brewfile / Brewfile.extra**: 入れているツールの台帳（リンクはせず `brew bundle` で使う）。`Brewfile` は全マシン共通の最小セット、`Brewfile.extra` は重いツールや macOS 専用の GUI アプリ（cask）
 
 ## git のローカル分離（推奨）
 
@@ -35,16 +35,20 @@ cp ./git/.gitconfig.local.example ~/.gitconfig.local
 
 ## 前提条件
 
-ツール一式は `Brewfile` にまとめています（Homebrew / Linuxbrew）:
+ツール一式は Homebrew / Linuxbrew 用の Brewfile にまとめています。共通セットと追加セットの 2 つに分けています:
+
+- `Brewfile`: 全マシン共通の最小セット（Linux VM でも入れる）
+- `Brewfile.extra`: 重いもの（go / node / ansible など）、インフラ・ドキュメント系、macOS 専用の GUI アプリ。必要なマシンだけで流す
 
 ```bash
-brew bundle --file=Brewfile            # 一括インストール
-brew bundle cleanup --file=Brewfile    # Brewfile に無いものを確認（--force で削除）
+brew bundle --file=Brewfile            # 共通セット
+brew bundle --file=Brewfile.extra      # 追加セット（手元の Mac など）
+cat Brewfile Brewfile.extra | brew bundle cleanup --file=-   # どちらにも無いものを確認（--force で削除）
 ```
 
 ### Linux VM（Debian / Ubuntu）
 
-macOS 以外でも同じ手順で使えます。Linuxbrew を入れてから Brewfile を流すだけです（cask は `OS.mac?` で除外済み）:
+macOS 以外でも同じ手順で使えます。Linuxbrew を入れてから共通の `Brewfile` を流すだけです（`Brewfile.extra` は不要）:
 
 ```bash
 sudo apt install -y build-essential curl git zsh   # Linuxbrew のビルド依存と zsh
@@ -117,6 +121,7 @@ dotfiles/
 ├── vscode/
 │   └── settings.json
 ├── Brewfile
+├── Brewfile.extra
 ├── install.sh
 ├── uninstall.sh
 └── README.md
