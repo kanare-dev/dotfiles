@@ -15,27 +15,21 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash ~/.claude/statusline.sh",
+    "command": "bunx -y ccstatusline@2.2.33",
+    "padding": 0,
     "refreshInterval": 10
   },
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
     "figma@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
-    "drawio@drawio": true,
-    "claude-hud@claude-hud": true
+    "drawio@drawio": true
   },
   "extraKnownMarketplaces": {
     "drawio": {
       "source": {
         "source": "github",
         "repo": "jgraph/drawio-mcp"
-      }
-    },
-    "claude-hud": {
-      "source": {
-        "source": "github",
-        "repo": "jarrodwatts/claude-hud"
       }
     }
   },
