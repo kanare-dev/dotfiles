@@ -34,18 +34,17 @@ fi
 # ============================================================
 # 思想: 履歴は貴重な資産。大量に保持し、セッション間で共有する
 # - 10万件の履歴を保持（長期間の作業履歴を検索可能に）
-# - SHARE_HISTORY: 全セッションで履歴を即座に共有（複数ターミナルで同期）
-# - INC_APPEND_HISTORY: コマンド実行と同時に履歴に追加（即座に検索可能）
-# - HIST_IGNORE_DUPS: 連続する重複コマンドを無視（履歴をクリーンに保つ）
 HISTSIZE=100000
 SAVEHIST=100000
-setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS
+
+setopt SHARE_HISTORY        # 全セッションで履歴を即座に共有（複数ターミナルで同期）
+setopt INC_APPEND_HISTORY   # コマンド実行と同時に履歴に追加（即座に検索可能）
+setopt HIST_IGNORE_DUPS     # 連続する重複コマンドを無視（履歴をクリーンに保つ）
 
 # 履歴の質をさらに上げる（任意）
-# - EXTENDED_HISTORY: タイムスタンプ等を保存（あとで見返しやすい）
-# - HIST_IGNORE_ALL_DUPS: 履歴全体で重複を減らす
-# - HIST_REDUCE_BLANKS: 余計な空白を除去
-setopt EXTENDED_HISTORY HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+setopt EXTENDED_HISTORY     # タイムスタンプ等を保存（あとで見返しやすい）
+setopt HIST_IGNORE_ALL_DUPS # 履歴全体で重複を減らす
+setopt HIST_REDUCE_BLANKS   # 余計な空白を除去
 
 # ============================================================
 # Completion (zsh builtin)
