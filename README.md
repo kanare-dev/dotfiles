@@ -49,7 +49,7 @@ macOS 以外でも同じ手順で使えます。Linuxbrew を入れてから Bre
 ```bash
 sudo apt install -y build-essential curl git zsh   # Linuxbrew のビルド依存と zsh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-git clone <このリポジトリ> ~/dotfiles && cd ~/dotfiles
+git clone https://github.com/kanare-dev/dotfiles.git ~/dotfiles && cd ~/dotfiles
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"   # このシェルだけ brew を有効化
 brew bundle --file=Brewfile
 ./install.sh
