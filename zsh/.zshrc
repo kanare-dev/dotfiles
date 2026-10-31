@@ -23,6 +23,12 @@ typeset -U path PATH
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
+# terminfo が無い TERM を持ち込まれたときは xterm-256color に落とす
+# - ssh 先に Ghostty の terminfo が無いと、zsh のカーソル移動や行の消去が効かず入力表示が崩れる
+if [[ "$TERM" == xterm-ghostty ]] && ! infocmp xterm-ghostty &>/dev/null; then
+  export TERM=xterm-256color
+fi
+
 # Homebrew の prefix（fzf とプラグインの探索で共有する）
 # - 通常は ~/.zprofile の `brew shellenv` が設定済み。未設定のときだけ brew を呼ぶ（fork を避ける）
 # - Linuxbrew は公式インストーラが ~/.zprofile を書き換えないため、既定の場所を自分で探して有効化する
