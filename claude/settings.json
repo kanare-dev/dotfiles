@@ -1,10 +1,5 @@
 {
   "model": "opusplan",
-  "statusLine": {
-    "type": "command",
-    "command": "bunx -y ccstatusline@2.2.23",
-    "padding": 0
-  },
   "hooks": {
     "PostToolUse": [
       {
@@ -18,17 +13,28 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  },
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
     "figma@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
-    "drawio@drawio": true
+    "drawio@drawio": true,
+    "claude-hud@claude-hud": true
   },
   "extraKnownMarketplaces": {
     "drawio": {
       "source": {
         "source": "github",
         "repo": "jgraph/drawio-mcp"
+      }
+    },
+    "claude-hud": {
+      "source": {
+        "source": "github",
+        "repo": "jarrodwatts/claude-hud"
       }
     }
   },
