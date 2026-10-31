@@ -42,6 +42,24 @@ brew bundle --file=Brewfile            # 一括インストール
 brew bundle cleanup --file=Brewfile    # Brewfile に無いものを確認（--force で削除）
 ```
 
+### Linux VM（Debian / Ubuntu）
+
+macOS 以外でも同じ手順で使えます。Linuxbrew を入れてから Brewfile を流すだけです（cask は `OS.mac?` で除外済み）:
+
+```bash
+sudo apt install -y build-essential curl git zsh   # Linuxbrew のビルド依存と zsh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+git clone <このリポジトリ> ~/dotfiles && cd ~/dotfiles
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"   # このシェルだけ brew を有効化
+brew bundle --file=Brewfile
+./install.sh
+chsh -s "$(command -v zsh)"
+```
+
+- `.zshrc` が `/home/linuxbrew/.linuxbrew` と `~/.linuxbrew` を自動検出するため、`~/.zprofile` の編集は不要
+- ghostty / vscode / fastfetch の設定も Linux 用のパス（`~/.config/...`）にリンクされる。ヘッドレスな VM では使われないだけで無害
+- `git/.gitconfig.local` を VM 側にも用意する（上記「git のローカル分離」参照）
+
 最低限、以下はインストールスクリプトがチェックします:
 
 - **starship**: `curl -sS https://starship.rs/install.sh | sh`
