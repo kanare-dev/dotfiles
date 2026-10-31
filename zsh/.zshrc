@@ -123,12 +123,10 @@ alias gb='git branch'
 alias gp='git push'
 alias gf='git fetch'
 
-# --- grep ---
-alias gr='grep'
-
 # --- Claude ---
+# cc はシステムの C コンパイラ (/usr/bin/cc) と衝突するため cl にする
 if command -v claude >/dev/null 2>&1; then
-  alias cc='claude'
+  alias cl='claude'
 fi
 
 # ============================================================
