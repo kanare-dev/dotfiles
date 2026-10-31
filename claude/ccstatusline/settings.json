@@ -1,74 +1,88 @@
 {
-  "version": 3,
+  "version": 4,
   "lines": [
     [
       {
         "id": "1",
         "type": "current-working-dir",
-        "color": "blue",
+        "color": "hex:FFFFFF",
         "rawValue": true,
         "metadata": {
           "segments": "2",
           "abbreviateHome": "true"
-        }
-      },
-      {
-        "id": "2",
-        "type": "separator"
+        },
+        "backgroundColor": "hex:D9534F",
+        "character": "󰉋"
       },
       {
         "id": "3",
         "type": "model",
-        "color": "cyan"
-      },
-      {
-        "id": "4",
-        "type": "separator"
+        "color": "hex:2B2B3A",
+        "backgroundColor": "hex:E8903A",
+        "rawValue": false,
+        "metadata": {
+          "label": "󰚩 "
+        }
       },
       {
         "id": "5",
-        "type": "context-percentage",
-        "color": "brightBlack",
-        "rawValue": true,
-        "bold": true
-      },
-      {
-        "id": "6",
-        "type": "separator"
+        "type": "custom-command",
+        "commandPath": "$HOME/.config/ccstatusline/context-bar.sh squares 10 󰍛",
+        "timeout": 2000,
+        "backgroundColor": "hex:F2C14E",
+        "color": "hex:2B2B3A"
       },
       {
         "id": "7",
         "type": "git-branch",
-        "color": "magenta"
-      },
-      {
-        "id": "8",
-        "type": "separator"
+        "color": "hex:2B2B3A",
+        "backgroundColor": "hex:7FB48C"
       },
       {
         "id": "9",
         "type": "git-changes",
-        "color": "yellow"
+        "color": "hex:2B2B3A",
+        "backgroundColor": "hex:5B8FD6"
+      },
+      {
+        "id": "11",
+        "type": "git-ahead-behind",
+        "color": "hex:2B2B3A",
+        "backgroundColor": "hex:A98BD8"
       }
     ],
-    [],
+    [
+      {
+        "id": "12",
+        "type": "custom-command",
+        "commandPath": "$HOME/.config/ccstatusline/usage-line.sh",
+        "timeout": 2000,
+        "color": "hex:A0A0A0"
+      }
+    ],
     []
   ],
   "flexMode": "full-minus-40",
   "compactThreshold": 60,
-  "colorLevel": 2,
+  "colorLevel": 3,
   "inheritSeparatorColors": false,
   "globalBold": false,
   "powerline": {
-    "enabled": false,
+    "enabled": true,
     "separators": [
       ""
     ],
     "separatorInvertBackground": [
       false
     ],
-    "startCaps": [],
-    "endCaps": [],
+    "startCaps": [
+      "",
+      ""
+    ],
+    "endCaps": [
+      "",
+      ""
+    ],
     "autoAlign": false
   }
 }
