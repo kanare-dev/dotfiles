@@ -115,9 +115,11 @@ mkcd() {
 # eza の有無は ls の定義だけで吸収する（ll / la / lla は ls 経由なので分岐の外に置ける）
 # ツリー表示は標準の ls に無いため、eza があるときだけ定義する
 if (( $+commands[eza] )); then
-  alias ls="eza --icons"
+  # --icons は新しい eza だと値を任意で取り、後ろの引数（ls sample の sample）を値として食う
+  # - `=auto` と明示すれば版によらず後続の引数をパスとして扱う
+  alias ls="eza --icons=auto"
 
-  lt() { command eza --tree --icons "$@"; }
+  lt() { command eza --tree --icons=auto "$@"; }
   # lt に詳細（パーミッション・サイズ・更新日時）を付ける。深いときは llt -L 2 のように階層を絞る
   llt() { lt -l "$@"; }
 fi
