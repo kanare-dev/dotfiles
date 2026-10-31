@@ -30,6 +30,7 @@ check_prerequisites() {
         done
         echo ""
         echo "インストール方法:"
+        echo "  まとめて: brew bundle --file=$DOTFILES_DIR/Brewfile  (Homebrew / Linuxbrew)"
         echo "  starship: curl -sS https://starship.rs/install.sh | sh"
         if [[ "$OS" == "Darwin" ]]; then
             echo "  fzf: brew install fzf"

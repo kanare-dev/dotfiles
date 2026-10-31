@@ -20,6 +20,7 @@
 - **ghostty**: Ghostty ターミナル設定 (macOS: `~/Library/Application Support/com.mitchellh.ghostty/config`、共通: `~/.config/ghostty/config`)
 - **fastfetch**: fastfetch の表示設定 (`~/.config/fastfetch/config.jsonc`、Nerd Font アイコン付きの項目名)
 - **vscode**: VSCode のユーザー設定 (macOS: `~/Library/Application Support/Code/User/settings.json`、Linux: `~/.config/Code/User/settings.json`)
+- **Brewfile**: 入れているツールの台帳（リンクはせず `brew bundle` で使う。cask は macOS のみ）
 
 ## git のローカル分離（推奨）
 
@@ -34,7 +35,14 @@ cp ./git/.gitconfig.local.example ~/.gitconfig.local
 
 ## 前提条件
 
-以下のツールのインストールを推奨します（インストールスクリプトがチェックします）:
+ツール一式は `Brewfile` にまとめています（Homebrew / Linuxbrew）:
+
+```bash
+brew bundle --file=Brewfile            # 一括インストール
+brew bundle cleanup --file=Brewfile    # Brewfile に無いものを確認（--force で削除）
+```
+
+最低限、以下はインストールスクリプトがチェックします:
 
 - **starship**: `curl -sS https://starship.rs/install.sh | sh`
 - **fzf**: `brew install fzf`（Linux は `sudo apt install fzf`）
@@ -87,6 +95,7 @@ dotfiles/
 │   └── config.jsonc
 ├── vscode/
 │   └── settings.json
+├── Brewfile
 ├── install.sh
 ├── uninstall.sh
 └── README.md
