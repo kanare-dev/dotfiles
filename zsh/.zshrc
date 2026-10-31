@@ -4,8 +4,37 @@
 # 思想: ユーザーローカルのbinを最優先に配置する
 # - システムやパッケージマネージャーのbinより優先
 # - カスタムスクリプトや手動インストールツールを優先的に使用
+# - インストーラが追記する PATH もここにまとめる（読み込み順を一か所で把握するため）
 typeset -U path PATH
 [[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
+
+# Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# ============================================================
+# Environment
+# ============================================================
+# 思想: 環境変数は PATH の直後にまとめ、以降の設定から参照できるようにする
+
+# default editor (used by git, less, crontab -e, etc.)
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+
+# git commit signing key lives in the standard macOS ssh-agent (see ~/.ssh/config Host * block)
+
+# ============================================================
+# secrets (do not commit)
+# ============================================================
+# 思想: 秘密情報は dotfiles に入れず、ホーム直下のローカルファイルで管理する
+# - リポジトリ配下に置かない（誤コミット/漏洩リスクを下げる）
+# - 存在しない場合はエラーにせず静かにスキップ（環境差に強くする）
+if [[ -f "$HOME/.zshrc.secret" ]]; then
+  source "$HOME/.zshrc.secret"
+fi
 
 # ============================================================
 # History
@@ -43,35 +72,8 @@ setopt ALWAYS_TO_END    # 補完後カーソルを末尾へ
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# ============================================================
-# fzf (history/search core)
-# ============================================================
-# 思想: 履歴検索は必須機能。柔軟にインストール方法に対応し、必須ではない
-# - 複数のインストール方法に対応（手動インストール、Homebrew）
-# - 存在しない場合はエラーにせずスキップ（ポータブルな設定）
-# - 大量の履歴を効率的に検索するためのコアツール
-if command -v fzf >/dev/null 2>&1; then
-  if [[ -f ~/.fzf.zsh ]]; then
-    source ~/.fzf.zsh
-  elif command -v brew >/dev/null 2>&1; then
-    FZF_BASE="$(brew --prefix)/opt/fzf"
-    [[ -f "$FZF_BASE/shell/completion.zsh" ]] && source "$FZF_BASE/shell/completion.zsh"
-    [[ -f "$FZF_BASE/shell/key-bindings.zsh" ]] && source "$FZF_BASE/shell/key-bindings.zsh"
-  else
-    # Linux (apt 等): fzf 0.48+ は自身がシェル統合を出力する
-    source <(fzf --zsh 2>/dev/null) 2>/dev/null
-  fi
-fi
-
-# ============================================================
-# Prompt (visual, last)
-# ============================================================
-# 思想: 視覚的な設定は最後に読み込む（他の設定に影響を与えない）
-# - プロンプトは見た目だけの機能なので、機能的な設定の後に配置
-# - 存在しない場合はスキップ（必須ではない装飾機能）
-if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init zsh)"
-fi
+# bun completions（compinit の後に読む必要がある）
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # ============================================================
 # エイリアス
@@ -131,22 +133,42 @@ alias gb='git branch'
 alias gp='git push'
 alias gf='git fetch'
 
-# grep
+# --- grep ---
 alias gr='grep'
 
-# Claude
+# --- Claude ---
 if command -v claude >/dev/null 2>&1; then
   alias cc='claude'
 fi
 
 # ============================================================
-# secrets (do not commit)
+# fzf (history/search core)
 # ============================================================
-# 思想: 秘密情報は dotfiles に入れず、ホーム直下のローカルファイルで管理する
-# - リポジトリ配下に置かない（誤コミット/漏洩リスクを下げる）
-# - 存在しない場合はエラーにせず静かにスキップ（環境差に強くする）
-if [[ -f "$HOME/.zshrc.secret" ]]; then
-  source "$HOME/.zshrc.secret"
+# 思想: 履歴検索は必須機能。柔軟にインストール方法に対応し、必須ではない
+# - 複数のインストール方法に対応（手動インストール、Homebrew）
+# - 存在しない場合はエラーにせずスキップ（ポータブルな設定）
+# - 大量の履歴を効率的に検索するためのコアツール
+if command -v fzf >/dev/null 2>&1; then
+  if [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+  elif command -v brew >/dev/null 2>&1; then
+    FZF_BASE="$(brew --prefix)/opt/fzf"
+    [[ -f "$FZF_BASE/shell/completion.zsh" ]] && source "$FZF_BASE/shell/completion.zsh"
+    [[ -f "$FZF_BASE/shell/key-bindings.zsh" ]] && source "$FZF_BASE/shell/key-bindings.zsh"
+  else
+    # Linux (apt 等): fzf 0.48+ は自身がシェル統合を出力する
+    source <(fzf --zsh 2>/dev/null) 2>/dev/null
+  fi
+fi
+
+# ============================================================
+# zoxide（ディレクトリ移動補助）
+# ============================================================
+# 思想: ディレクトリ移動を補助する
+# - zoxideコマンドが存在する場合のみ有効化
+# - 存在しない場合はスキップ（エラーにならない）
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
 fi
 
 # ============================================================
@@ -157,37 +179,6 @@ fi
 # - 存在しない場合はスキップ（エラーにならない）
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
-fi
-
-
-# ============================================================
-# zsh-補完・強調表示（視認性強化系）
-# ============================================================
-# zsh-autosuggestions: 入力補完を提案してくれる
-# zsh-syntax-highlighting: コマンドの構文を色付け表示
-# - Homebrew (macOS) または apt (/usr/share) でインストールされている場合のみ有効化
-# - 存在しない場合はスキップ（エラーにならない）
-ZSH_PLUGIN_DIRS=(/usr/share)
-command -v brew >/dev/null 2>&1 && ZSH_PLUGIN_DIRS=("$(brew --prefix)/share" $ZSH_PLUGIN_DIRS)
-
-for _dir in $ZSH_PLUGIN_DIRS; do
-  if [[ -f "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
-    # デフォルトのANSIグレーはテーマの背景色と被って見づらいことがあるため、
-    # TokyoNight のコメント色を直指定して視認性を確保する
-    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#565f89'
-    source "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    break
-  fi
-done
-
-# ============================================================
-# zoxide（ディレクトリ移動補助）
-# ============================================================
-# 思想: ディレクトリ移動を補助する
-# - zoxideコマンドが存在する場合のみ有効化
-# - 存在しない場合はスキップ（エラーにならない）
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init zsh)"
 fi
 
 # ============================================================
@@ -206,6 +197,44 @@ if command -v yazi >/dev/null 2>&1; then
   }
 fi
 
+# ============================================================
+# broot / kiro（シェル統合）
+# ============================================================
+# 思想: 各ツールが要求するシェル統合は、対象が存在するときだけ読み込む
+[[ -f "$HOME/.config/broot/launcher/bash/br" ]] && source "$HOME/.config/broot/launcher/bash/br"
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# ============================================================
+# Prompt (visual)
+# ============================================================
+# 思想: 視覚的な設定は最後寄りに読み込む（他の設定に影響を与えない）
+# - プロンプトは見た目だけの機能なので、機能的な設定の後に配置
+# - 存在しない場合はスキップ（必須ではない装飾機能）
+# - zsh-syntax-highlighting だけはさらに後ろ（次のセクション）
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+# ============================================================
+# zsh-補完・強調表示（視認性強化系, last）
+# ============================================================
+# zsh-autosuggestions: 入力補完を提案してくれる
+# zsh-syntax-highlighting: コマンドの構文を色付け表示
+# - Homebrew (macOS) または apt (/usr/share) でインストールされている場合のみ有効化
+# - 存在しない場合はスキップ（エラーにならない）
+ZSH_PLUGIN_DIRS=(/usr/share)
+command -v brew >/dev/null 2>&1 && ZSH_PLUGIN_DIRS=("$(brew --prefix)/share" $ZSH_PLUGIN_DIRS)
+
+for _dir in $ZSH_PLUGIN_DIRS; do
+  if [[ -f "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    # デフォルトのANSIグレーはテーマの背景色と被って見づらいことがあるため、
+    # TokyoNight のコメント色を直指定して視認性を確保する
+    ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#565f89'
+    source "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    break
+  fi
+done
+
 # zsh-syntax-highlighting はできるだけ最後に読むのが推奨
 for _dir in $ZSH_PLUGIN_DIRS; do
   if [[ -f "$_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
@@ -214,24 +243,3 @@ for _dir in $ZSH_PLUGIN_DIRS; do
   fi
 done
 unset _dir
-
-[[ -f "$HOME/.config/broot/launcher/bash/br" ]] && source "$HOME/.config/broot/launcher/bash/br"
-
-# Added by Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# kiro
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# default editor (used by git, less, crontab -e, etc.)
-export EDITOR="nvim"
-export VISUAL="$EDITOR"
-
-# git commit signing key lives in the standard macOS ssh-agent (see ~/.ssh/config Host * block)
