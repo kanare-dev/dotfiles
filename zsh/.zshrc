@@ -8,9 +8,6 @@
 typeset -U path PATH
 [[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 
-# Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
-
 # ============================================================
 # Environment
 # ============================================================
@@ -191,11 +188,10 @@ if command -v yazi >/dev/null 2>&1; then
 fi
 
 # ============================================================
-# broot / kiro（シェル統合）
+# broot（シェル統合）
 # ============================================================
-# 思想: 各ツールが要求するシェル統合は、対象が存在するときだけ読み込む
+# 思想: ツールが要求するシェル統合は、対象が存在するときだけ読み込む
 [[ -f "$HOME/.config/broot/launcher/bash/br" ]] && source "$HOME/.config/broot/launcher/bash/br"
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 # ============================================================
 # Prompt (visual)
