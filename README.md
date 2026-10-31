@@ -63,6 +63,7 @@ chsh -s "$(command -v zsh)"
 - `.zshrc` が `/home/linuxbrew/.linuxbrew` と `~/.linuxbrew` を自動検出するため、`~/.zprofile` の編集は不要
 - ghostty / vscode / fastfetch の設定も Linux 用のパス（`~/.config/...`）にリンクされる。ヘッドレスな VM では使われないだけで無害
 - `git/.gitconfig.local` を VM 側にも用意する（上記「git のローカル分離」参照）
+- 表示崩れや git の SSL エラーなど、つまずきやすい点は [docs/linux-vm.md](docs/linux-vm.md) を参照
 
 最低限、以下はインストールスクリプトがチェックします:
 
@@ -120,6 +121,8 @@ dotfiles/
 │   └── config.jsonc
 ├── vscode/
 │   └── settings.json
+├── docs/
+│   └── linux-vm.md
 ├── Brewfile
 ├── Brewfile.extra
 ├── install.sh
