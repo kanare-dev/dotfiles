@@ -13,7 +13,7 @@ set -u
 
 CHOICE_FILE="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/statusline-choice"
 HUD_LAUNCHER="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/plugins/claude-hud/statusline.mjs"
-CCSTATUSLINE_CMD="ccstatusline@2.2.23"
+CCSTATUSLINE_CMD="ccstatusline@2.2.33"
 
 current() {
     local choice=""
