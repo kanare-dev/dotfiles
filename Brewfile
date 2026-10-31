@@ -55,8 +55,7 @@ brew "sops"                      # シークレット暗号化
 # ==== 言語・ランタイム ====
 brew "go"
 brew "node"
-brew "pyenv"
-brew "uv"                        # Python パッケージ・プロジェクト管理
+brew "uv"                        # Python のバージョン・パッケージ・プロジェクト管理 (pyenv の代替)
 
 # ==== インフラ・クラウド ====
 brew "awscli"
