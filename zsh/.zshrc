@@ -202,6 +202,22 @@ if command -v zoxide >/dev/null 2>&1; then
   eval "$(zoxide init zsh)"
 fi
 
+# ============================================================
+# yazi（ファイルマネージャ）
+# ============================================================
+# 思想: yazi 終了時に、最後にいたディレクトリへシェルも移動する
+# - `y` で起動し、終了(q)すると yazi で開いていた場所に cd する（Q は cd しない）
+# - yazi コマンドが存在する場合のみ有効化
+if command -v yazi >/dev/null 2>&1; then
+  function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    command yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [[ -n "$cwd" && "$cwd" != "$PWD" ]] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+  }
+fi
+
 # zsh-syntax-highlighting はできるだけ最後に読むのが推奨
 for _dir in $ZSH_PLUGIN_DIRS; do
   if [[ -f "$_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
