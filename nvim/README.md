@@ -87,6 +87,25 @@ Telescope内の操作:
 | --- | --- |
 | `<Esc>` | 検索ハイライトを消す (`:nohlsearch`) |
 
+## プラグインの更新（lazy.nvim）
+
+プラグインの更新は Neovim 内で `:Lazy update` を実行して行う。
+
+| コマンド | 動作 |
+| --- | --- |
+| `:Lazy` | プラグイン管理画面を開く |
+| `:Lazy update` | 全プラグインを最新版へ更新する |
+| `:Lazy restore` | `lazy-lock.json` の記録どおりのバージョンへ戻す |
+
+運用の流れ:
+
+1. `:Lazy update` で更新し、動作に問題がないか確認する。
+2. 更新で `lazy-lock.json` が書き換わるので、リポジトリにコミットする（例: `chore(nvim): lazy-lock.json のプラグインを更新`）。
+3. 不具合が出たら `:Lazy restore` で `lazy-lock.json` の状態に戻す。
+
+`lazy-lock.json` は `~/.config/nvim/` 配下のリンク経由でリポジトリ内のファイルを直接更新する。
+別マシンでは `git pull` 後に `:Lazy restore` を実行すると、同じバージョンに揃えられる。
+
 ## 補完（blink.cmp）
 
 `preset = "default"` のため、標準的な補完キーバインド（`<C-space>`で候補表示、`<Tab>`で確定など）に従う。
