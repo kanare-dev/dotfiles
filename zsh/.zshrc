@@ -11,10 +11,6 @@ typeset -U path PATH
 # Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
 # ============================================================
 # Environment
 # ============================================================
@@ -71,9 +67,6 @@ setopt ALWAYS_TO_END    # 補完後カーソルを末尾へ
 # 代表的な補完スタイル（好みで調整）
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# bun completions（compinit の後に読む必要がある）
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # ============================================================
 # エイリアス

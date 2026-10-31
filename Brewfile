@@ -53,6 +53,7 @@ brew "age"                       # ファイル暗号化
 brew "sops"                      # シークレット暗号化
 
 # ==== 言語・ランタイム ====
+brew "bun"
 brew "go"
 brew "node"
 brew "uv"                        # Python のバージョン・パッケージ・プロジェクト管理 (pyenv の代替)
