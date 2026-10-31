@@ -106,9 +106,10 @@ if (( $+commands[eza] )); then
   llt() { lt -l "$@"; }
 fi
 
-alias ll='ls -l'
+# -h は eza では列見出し (--header)、標準の ls では読みやすいサイズ表示になる（どちらでも無害）
+alias ll='ls -lh'
 alias la='ls -a'
-alias lla='ls -la'
+alias lla='ls -lah'
 
 # cd したら中身を表示する（eza / ls どちらでも動く）
 # 非対話シェル（TTY なし）では発火させない: eza --icons が端末問い合わせでハングする事故を防ぐため
