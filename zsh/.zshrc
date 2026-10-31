@@ -129,6 +129,8 @@ if command -v eza >/dev/null 2>&1; then
   alias li="eza -la --icons --git"
 
   lt() { command eza --tree --icons "$@"; }
+  # ツリー表示に詳細(パーミッション・サイズ・更新日時)を付ける。深いときは llt -L 2 のように階層を絞る
+  llt() { lt -l "$@"; }
 else
   alias li="ls -la"
 fi
