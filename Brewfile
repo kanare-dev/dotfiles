@@ -13,8 +13,6 @@
 # `brew bundle cleanup` は両方のファイルを合わせて確認する（片方だけだと、もう片方のツールが削除候補に出る）:
 #   cat Brewfile Brewfile.extra | brew bundle cleanup --file=-
 
-tap "rjyo/moshi"
-
 # ==== シェル・プロンプト ====
 brew "starship"                 # 軽量で高速なクロスシェル対応プロンプト（git 状態や言語バージョンを表示）
 brew "fzf"                      # コマンドラインのあいまい検索（履歴・ファイル・任意のリストを絞り込む）
@@ -62,7 +60,12 @@ brew "uv"                       # Rust 製の高速な Python パッケージ・
 
 # ==== ネットワーク ====
 brew "mosh"                     # 回線切断や IP 変更に強い、SSH の代替となるリモートシェル
-brew "rjyo/moshi/moshi-hook"    # AI コーディングエージェントと Moshi モバイルアプリを中継するデーモン + CLI
+
+# moshi-hook は Linux では Homebrew で入れない（公式の手順で ~/.local/bin に入れ、systemd --user のサービスとして常駐させるため）
+if OS.mac?
+  tap "rjyo/moshi"
+  brew "rjyo/moshi/moshi-hook"  # AI コーディングエージェントと Moshi モバイルアプリを中継するデーモン + CLI
+end
 
 # ==== 遊び ====
 brew "cmatrix"                  # マトリックス風の緑の文字が降る画面を表示
