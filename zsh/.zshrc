@@ -100,8 +100,25 @@ mkcd() {
 }
 
 # --- ファイル一覧表示 ---
+# ll/la は ls のエイリアスなので、eza があれば ls 経由で eza になる
 alias ll='ls -l'
 alias la='ls -a'
+
+# eza があれば見やすく
+if command -v eza >/dev/null 2>&1; then
+  alias ls="eza --icons"
+  alias li="eza -la --icons --git"
+
+  lt() { command eza --tree --icons "$@"; }
+  # ツリー表示に詳細(パーミッション・サイズ・更新日時)を付ける。深いときは llt -L 2 のように階層を絞る
+  llt() { lt -l "$@"; }
+else
+  alias li="ls -la"
+fi
+
+# cdしたら中身が見える（eza/lsどっちでもOK）
+# 非対話シェル（TTYなし）では発火させない: eza --icons が端末問い合わせでハングする事故を防ぐため
+chpwd() { [[ -t 1 ]] && ls; }
 
 # --- Git ---
 # gはgitに割り当てる（頻度が最も高いため最短のキーを充てる）
@@ -122,22 +139,6 @@ alias gr='grep'
 if command -v claude >/dev/null 2>&1; then
   alias cc='claude'
 fi
-
-# eza があれば見やすく
-if command -v eza >/dev/null 2>&1; then
-  alias ls="eza --icons"
-  alias li="eza -la --icons --git"
-
-  lt() { command eza --tree --icons "$@"; }
-  # ツリー表示に詳細(パーミッション・サイズ・更新日時)を付ける。深いときは llt -L 2 のように階層を絞る
-  llt() { lt -l "$@"; }
-else
-  alias li="ls -la"
-fi
-
-# cdしたら中身が見える（eza/lsどっちでもOK）
-# 非対話シェル（TTYなし）では発火させない: eza --icons が端末問い合わせでハングする事故を防ぐため
-chpwd() { [[ -t 1 ]] && ls; }
 
 # ============================================================
 # secrets (do not commit)
