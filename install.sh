@@ -92,6 +92,40 @@ create_symlink() {
     echo "✓ $target を作成しました。"
 }
 
+# ファイルをコピーする関数（シンボリックリンクを受け付けないツール向け）
+# 内容が同じならスキップし、異なる既存ファイルはバックアップしてから上書きする
+copy_file() {
+    local source="$1"
+    local target="$2"
+
+    if [[ ! -e "$source" ]]; then
+        echo "⚠️  警告: $source が存在しません。スキップします。"
+        return 1
+    fi
+
+    # 以前のリンク方式で作ったシンボリックリンクはコピーに置き換える
+    if [[ -L "$target" ]]; then
+        rm "$target"
+    fi
+
+    if [[ -f "$target" ]] && cmp -s "$source" "$target"; then
+        echo "✓ $target は既に最新です。"
+        return 0
+    fi
+
+    if [[ -e "$target" ]]; then
+        echo "📦 既存の $target をバックアップします..."
+        mkdir -p "$BACKUP_DIR"
+        local rel="${target#"$HOME/"}"
+        mkdir -p "$(dirname "$BACKUP_DIR/$rel")"
+        mv "$target" "$BACKUP_DIR/$rel"
+        echo "$rel" >> "$MANIFEST_FILE"
+    fi
+
+    cp "$source" "$target"
+    echo "✓ $target をコピーしました。"
+}
+
 echo "🚀 dotfiles のインストールを開始します..."
 echo "   DOTFILES_DIR: $DOTFILES_DIR"
 echo ""
@@ -125,11 +159,19 @@ create_symlink "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 mkdir -p "$HOME/.claude"
 create_symlink "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 create_symlink "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+create_symlink "$DOTFILES_DIR/claude/statusline.sh" "$HOME/.claude/statusline.sh"
 mkdir -p "$HOME/.claude/hooks"
 create_symlink "$DOTFILES_DIR/claude/hooks/markdownlint.sh" "$HOME/.claude/hooks/markdownlint.sh"
 
 # markdownlint (Claude Code の markdownlint フックが参照するグローバル設定)
 create_symlink "$DOTFILES_DIR/markdownlint/.markdownlint-cli2.jsonc" "$HOME/.markdownlint-cli2.jsonc"
+
+# claude-hud
+# シンボリックリンクの設定ファイルは読み込み時に拒否される (O_NOFOLLOW) ため、
+# リンクではなくコピーする。~/.claude/plugins/claude-hud/ にはランチャーや
+# 状態ファイルも生成されるので、設定ファイルのみ扱う
+mkdir -p "$HOME/.claude/plugins/claude-hud"
+copy_file "$DOTFILES_DIR/claude/claude-hud/config.json" "$HOME/.claude/plugins/claude-hud/config.json"
 
 # ccstatusline
 mkdir -p "$HOME/.config/ccstatusline"
