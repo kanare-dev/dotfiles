@@ -21,7 +21,8 @@
     },
     {
       "type": "host",
-      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;141m󰌢 host     \u001b[0m"
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;141m󰌢 host     \u001b[0m",
+      "format": "{name}"
     },
     {
       "type": "kernel",
