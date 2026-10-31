@@ -127,7 +127,7 @@ style_root = "bg:user_username fg:dark"
 # ホスト名（通常は非表示、SSH接続時のみ表示）
 [hostname]
 ssh_only = true
-format = "[  $hostname ]($style)"
+format = "[ $hostname ]($style)"
 style = "bg:user_hostname fg:dark"
 
 # バッテリー（バッテリー駆動時に表示されやすくする）
