@@ -34,16 +34,17 @@ fi
 # ============================================================
 # 思想: 履歴は貴重な資産。大量に保持し、セッション間で共有する
 # - 10万件の履歴を保持（長期間の作業履歴を検索可能に）
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 
+# SHARE_HISTORY は INC_APPEND_HISTORY の動作（即時追記）を含むため、後者は指定しない
 setopt SHARE_HISTORY        # 全セッションで履歴を即座に共有（複数ターミナルで同期）
-setopt INC_APPEND_HISTORY   # コマンド実行と同時に履歴に追加（即座に検索可能）
-setopt HIST_IGNORE_DUPS     # 連続する重複コマンドを無視（履歴をクリーンに保つ）
 
 # 履歴の質をさらに上げる（任意）
-setopt EXTENDED_HISTORY     # タイムスタンプ等を保存（あとで見返しやすい）
+# HIST_IGNORE_ALL_DUPS は連続重複の除去（HIST_IGNORE_DUPS）を包含する
 setopt HIST_IGNORE_ALL_DUPS # 履歴全体で重複を減らす
+setopt EXTENDED_HISTORY     # タイムスタンプ等を保存（あとで見返しやすい）
 setopt HIST_REDUCE_BLANKS   # 余計な空白を除去
 
 # ============================================================
