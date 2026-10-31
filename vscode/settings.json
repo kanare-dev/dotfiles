@@ -1,5 +1,13 @@
 {
   // ========================================
+  // Chat
+  // ========================================
+  // エージェントバーを統合表示にする
+  "chat.unifiedAgentsBar.enabled": true,
+  // チャットのセッション一覧を縦積みで表示
+  "chat.viewSessions.orientation": "stacked",
+
+  // ========================================
   // Editor
   // ========================================
   // エディタのフォント(ターミナルとそろえる)
@@ -52,12 +60,16 @@
   "terminal.integrated.defaultProfile.osx": "zsh",
   // Nerd Fontを優先し、なければ等幅フォントにフォールバック
   "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font, Menlo, Monaco, 'Courier New', monospace",
+  // ターミナル起動時の初期ヒントを非表示
+  "terminal.integrated.initialHint": false,
 
   // ========================================
   // Window
   // ========================================
   // OSの外観設定に合わせてライト/ダークを自動切り替え
   "window.autoDetectColorScheme": true,
+  // UIの密度をコンパクトにする
+  "window.density.layout": "compact",
 
   // ========================================
   // Workbench
@@ -96,5 +108,6 @@
   // ========================================
   // Extensions: Remote - SSH
   // ========================================
-  "remote.SSH.configFile": "${userHome}/.ssh/config_vscode",
+  // Remote-SSH 専用の ssh config を使う
+  "remote.SSH.configFile": "~/.ssh/config_vscode",
 }
