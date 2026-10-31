@@ -15,7 +15,6 @@ SYMLINKS=(
     "$HOME/.config/nvim"
     "$HOME/.claude/settings.json"
     "$HOME/.claude/CLAUDE.md"
-    "$HOME/.claude/statusline.sh"
     "$HOME/.claude/hooks/markdownlint.sh"
     "$HOME/.markdownlint-cli2.jsonc"
     "$HOME/.config/ccstatusline/settings.json"
@@ -34,30 +33,6 @@ if [[ "$OS" == "Darwin" ]]; then
 else
     SYMLINKS+=("$HOME/.config/Code/User/settings.json")
 fi
-
-# コピーで配置したファイル（リンクを受け付けないツール向け）
-COPIES=(
-    "$HOME/.claude/plugins/claude-hud/config.json"
-)
-
-# コピーしたファイルを削除する関数（リポジトリと内容が同じ場合のみ）
-remove_copy() {
-    local target="$1"
-    local source="$DOTFILES_DIR/claude/claude-hud/config.json"
-
-    if [[ -L "$target" ]]; then
-        remove_symlink "$target"
-    elif [[ -f "$target" ]]; then
-        if cmp -s "$source" "$target"; then
-            rm "$target"
-            echo "✓ $target を削除しました。"
-        else
-            echo "⚠️  $target はリポジトリと内容が異なります。スキップします。"
-        fi
-    else
-        echo "- $target は存在しません。"
-    fi
-}
 
 # シンボリックリンクを削除する関数
 remove_symlink() {
@@ -187,11 +162,6 @@ echo ""
 # シンボリックリンクを削除
 for symlink in "${SYMLINKS[@]}"; do
     remove_symlink "$symlink"
-done
-
-# コピーしたファイルを削除
-for copy in "${COPIES[@]}"; do
-    remove_copy "$copy"
 done
 
 # バックアップからの復元を提案
