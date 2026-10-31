@@ -18,6 +18,7 @@
 - **markdownlint**: markdownlint-cli2 のグローバル設定 (`~/.markdownlint-cli2.jsonc`、MD013 を無効化)
 - **ccstatusline**: Claude Code ステータスライン設定 (`~/.config/ccstatusline/settings.json`)
 - **ghostty**: Ghostty ターミナル設定 (macOS: `~/Library/Application Support/com.mitchellh.ghostty/config`、共通: `~/.config/ghostty/config`)
+- **fastfetch**: fastfetch の表示設定 (`~/.config/fastfetch/config.jsonc`、Nerd Font アイコン付きの項目名)
 - **vscode**: VSCode のユーザー設定 (macOS: `~/Library/Application Support/Code/User/settings.json`、Linux: `~/.config/Code/User/settings.json`)
 
 ## git のローカル分離（推奨）
@@ -82,6 +83,8 @@ dotfiles/
 │   └── settings.json
 ├── ghostty/
 │   └── config
+├── fastfetch/
+│   └── config.jsonc
 ├── vscode/
 │   └── settings.json
 ├── install.sh

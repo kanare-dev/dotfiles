@@ -19,6 +19,7 @@ SYMLINKS=(
     "$HOME/.markdownlint-cli2.jsonc"
     "$HOME/.config/ccstatusline/settings.json"
     "$HOME/.config/ghostty/config"
+    "$HOME/.config/fastfetch/config.jsonc"
 )
 
 # OS ごとに配置先が異なるもの

@@ -1,0 +1,109 @@
+// fastfetch 設定（macOS / Linux 共通）
+// 思想: ロゴは OS 自動判定。該当しないモジュール（macOS の de、PC の battery など）は自動で非表示になる。
+//
+// 枠の描き方:
+//   - 枠は 1 行ごとに「key の先頭」へ ANSI カーソル移動を埋め込んで描いている
+//     （ESC[67C で右辺位置へ → │ → ESC[68D で行頭へ戻る → 左辺 │）。
+//     値の長さに関係なく右辺が揃い、ロゴ幅にも依存しない。
+//   - 枠の全幅は 68 桁。幅を変えるときは "[67C" "[68D" "[66D" と上下辺の ─ の数を揃えて置換する。
+//   - 色は 256 色 (ESC[38;5;Nm)。枠は 179（金）、項目ごとの色は key 内に直接埋め込んでいる。
+//   - 値の幅が 66 桁を超える（長いホスト名など）と右辺が崩れる。
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "display": {
+    "separator": "  "
+  },
+  "modules": [
+    {
+      "type": "title",
+      "key": "\u001b[67C\u001b[38;5;179m╮\u001b[68D╭──────────────────────────────────────────────────────────────────╮\u001b[66D\u001b[0m",
+      "format": "\u001b[1D{user-name-colored}@{host-name-colored} "
+    },
+    {
+      "type": "host",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;141m󰌢 host     \u001b[0m"
+    },
+    {
+      "type": "kernel",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;203m󰒓 kernel   \u001b[0m"
+    },
+    {
+      "type": "uptime",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;110m󰅐 uptime   \u001b[0m"
+    },
+    {
+      "type": "os",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;255m󰟀 distro   \u001b[0m"
+    },
+    {
+      "type": "de",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;109m󰧨 desktop  \u001b[0m"
+    },
+    {
+      "type": "wm",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;109m󰖲 wm       \u001b[0m"
+    },
+    {
+      "type": "terminal",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;176m󰆍 term     \u001b[0m"
+    },
+    {
+      "type": "shell",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;114m󰆍 shell    \u001b[0m"
+    },
+    {
+      "type": "packages",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;255m󰏖 packages \u001b[0m"
+    },
+    {
+      "type": "editor",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;167m󰏫 editor   \u001b[0m"
+    },
+    {
+      "type": "cpu",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;215m󰍛 cpu      \u001b[0m"
+    },
+    {
+      "type": "gpu",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;215m󰍛 gpu      \u001b[0m"
+    },
+    {
+      "type": "display",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;117m󰍹 display  \u001b[0m",
+      "format": "{name}: {width}x{height} @ {scale-factor}x, {refresh-rate} Hz [{type}]"
+    },
+    {
+      "type": "disk",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;147m󰋊 disk     \u001b[0m",
+      "folders": [
+        "/",
+        "/home"
+      ]
+    },
+    {
+      "type": "memory",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;150m memory   \u001b[0m"
+    },
+    {
+      "type": "swap",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;150m󰾴 swap     \u001b[0m"
+    },
+    {
+      "type": "battery",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;114m󰁹 battery  \u001b[0m"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[38;5;179m├──────────────────────────────────────────────────────────────────┤\u001b[0m"
+    },
+    {
+      "type": "colors",
+      "key": "\u001b[67C\u001b[38;5;179m│\u001b[68D│\u001b[0m \u001b[38;5;255m󰏘 colors   \u001b[0m",
+      "symbol": "circle"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[38;5;179m╰──────────────────────────────────────────────────────────────────╯\u001b[0m"
+    }
+  ]
+}

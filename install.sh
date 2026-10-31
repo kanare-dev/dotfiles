@@ -145,6 +145,10 @@ fi
 mkdir -p "$HOME/.config/ghostty"
 create_symlink "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
+# fastfetch
+mkdir -p "$HOME/.config/fastfetch"
+create_symlink "$DOTFILES_DIR/fastfetch/config.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+
 # VSCode
 if [[ "$OS" == "Darwin" ]]; then
     VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
