@@ -133,7 +133,7 @@ create_symlink "$DOTFILES_DIR/markdownlint/.markdownlint-cli2.jsonc" "$HOME/.mar
 
 # ccstatusline
 mkdir -p "$HOME/.config/ccstatusline"
-create_symlink "$DOTFILES_DIR/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
+create_symlink "$DOTFILES_DIR/claude/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
 
 # Ghostty
 # macOS では Application Support 配下が優先されるが、XDG (~/.config/ghostty) も

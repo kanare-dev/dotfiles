@@ -83,12 +83,12 @@ dotfiles/
 ├── claude/
 │   ├── settings.json
 │   ├── CLAUDE.md
-│   └── hooks/
-│       └── markdownlint.sh
+│   ├── hooks/
+│   │   └── markdownlint.sh
+│   └── ccstatusline/
+│       └── settings.json
 ├── markdownlint/
 │   └── .markdownlint-cli2.jsonc
-├── ccstatusline/
-│   └── settings.json
 ├── ghostty/
 │   └── config
 ├── fastfetch/
