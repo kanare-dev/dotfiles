@@ -19,6 +19,8 @@ SYMLINKS=(
     "$HOME/.claude/hooks/markdownlint.sh"
     "$HOME/.markdownlint-cli2.jsonc"
     "$HOME/.config/ccstatusline/settings.json"
+    "$HOME/.config/ccstatusline/context-bar.sh"
+    "$HOME/.config/ccstatusline/usage-line.sh"
     "$HOME/.config/ghostty/config"
     "$HOME/.config/fastfetch/config.jsonc"
 )

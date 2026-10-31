@@ -176,6 +176,10 @@ copy_file "$DOTFILES_DIR/claude/claude-hud/config.json" "$HOME/.claude/plugins/c
 # ccstatusline
 mkdir -p "$HOME/.config/ccstatusline"
 create_symlink "$DOTFILES_DIR/claude/ccstatusline/settings.json" "$HOME/.config/ccstatusline/settings.json"
+# コンテキストバーを出力するスクリプト (settings.json の custom-command から呼ばれる)
+create_symlink "$DOTFILES_DIR/claude/ccstatusline/context-bar.sh" "$HOME/.config/ccstatusline/context-bar.sh"
+# 使用量の行を出力するスクリプト (context-bar.sh と同じディレクトリに置く)
+create_symlink "$DOTFILES_DIR/claude/ccstatusline/usage-line.sh" "$HOME/.config/ccstatusline/usage-line.sh"
 
 # Ghostty
 # macOS では Application Support 配下が優先されるが、XDG (~/.config/ghostty) も
