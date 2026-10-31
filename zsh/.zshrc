@@ -25,6 +25,16 @@ export VISUAL="$EDITOR"
 
 # Homebrew の prefix（fzf とプラグインの探索で共有する）
 # - 通常は ~/.zprofile の `brew shellenv` が設定済み。未設定のときだけ brew を呼ぶ（fork を避ける）
+# - Linuxbrew は公式インストーラが ~/.zprofile を書き換えないため、既定の場所を自分で探して有効化する
+if (( ! $+commands[brew] )); then
+  for _brew in /home/linuxbrew/.linuxbrew/bin/brew "$HOME/.linuxbrew/bin/brew"; do
+    if [[ -x "$_brew" ]]; then
+      eval "$("$_brew" shellenv)"
+      break
+    fi
+  done
+  unset _brew
+fi
 (( $+commands[brew] )) && : ${HOMEBREW_PREFIX:=$(brew --prefix)}
 
 # ============================================================
