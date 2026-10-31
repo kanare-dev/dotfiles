@@ -17,10 +17,12 @@ typeset -U path PATH
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 
-# git commit signing key lives in the standard macOS ssh-agent (see ~/.ssh/config Host * block)
+# Homebrew の prefix（fzf / プラグインの探索で共有する）
+# - 通常は ~/.zprofile の `brew shellenv` が設定済み。未設定のときだけ brew を呼ぶ（fork を避ける）
+(( $+commands[brew] )) && : ${HOMEBREW_PREFIX:=$(brew --prefix)}
 
 # ============================================================
-# secrets (do not commit)
+# Secrets (do not commit)
 # ============================================================
 # 思想: 秘密情報は dotfiles に入れず、ホーム直下のローカルファイルで管理する
 # - リポジトリ配下に置かない（誤コミット/漏洩リスクを下げる）
@@ -66,7 +68,7 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # ============================================================
-# エイリアス
+# Aliases
 # ============================================================
 # 思想: よく使うコマンドは「安全」と「見やすさ」をデフォルトにする
 
@@ -95,7 +97,7 @@ mkcd() {
 # eza があれば見やすく
 # eza の有無は ls の定義だけで吸収する（ll/la/lla は ls 経由なので分岐の外に置ける）
 # ツリー表示は標準の ls に無いため、eza があるときだけ定義する
-if command -v eza >/dev/null 2>&1; then
+if (( $+commands[eza] )); then
   alias ls="eza --icons"
 
   lt() { command eza --tree --icons "$@"; }
@@ -125,7 +127,7 @@ alias gf='git fetch'
 
 # --- Claude ---
 # cc はシステムの C コンパイラ (/usr/bin/cc) と衝突するため cl にする
-if command -v claude >/dev/null 2>&1; then
+if (( $+commands[claude] )); then
   alias cl='claude'
 fi
 
@@ -136,11 +138,11 @@ fi
 # - 複数のインストール方法に対応（手動インストール、Homebrew）
 # - 存在しない場合はエラーにせずスキップ（ポータブルな設定）
 # - 大量の履歴を効率的に検索するためのコアツール
-if command -v fzf >/dev/null 2>&1; then
+if (( $+commands[fzf] )); then
   if [[ -f ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
-  elif command -v brew >/dev/null 2>&1; then
-    FZF_BASE="$(brew --prefix)/opt/fzf"
+  elif [[ -n "$HOMEBREW_PREFIX" ]]; then
+    FZF_BASE="$HOMEBREW_PREFIX/opt/fzf"
     [[ -f "$FZF_BASE/shell/completion.zsh" ]] && source "$FZF_BASE/shell/completion.zsh"
     [[ -f "$FZF_BASE/shell/key-bindings.zsh" ]] && source "$FZF_BASE/shell/key-bindings.zsh"
   else
@@ -155,7 +157,7 @@ fi
 # 思想: ディレクトリ移動を補助する
 # - zoxideコマンドが存在する場合のみ有効化
 # - 存在しない場合はスキップ（エラーにならない）
-if command -v zoxide >/dev/null 2>&1; then
+if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh)"
 fi
 
@@ -165,7 +167,7 @@ fi
 # 思想: プロジェクトごとに必要な環境変数を自動で切り替える
 # - direnvコマンドが存在する場合のみ有効化
 # - 存在しない場合はスキップ（エラーにならない）
-if command -v direnv >/dev/null 2>&1; then
+if (( $+commands[direnv] )); then
   eval "$(direnv hook zsh)"
 fi
 
@@ -175,7 +177,7 @@ fi
 # 思想: yazi 終了時に、最後にいたディレクトリへシェルも移動する
 # - `y` で起動し、終了(q)すると yazi で開いていた場所に cd する（Q は cd しない）
 # - yazi コマンドが存在する場合のみ有効化
-if command -v yazi >/dev/null 2>&1; then
+if (( $+commands[yazi] )); then
   function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
     command yazi "$@" --cwd-file="$tmp"
@@ -197,20 +199,20 @@ fi
 # 思想: 視覚的な設定は最後寄りに読み込む（他の設定に影響を与えない）
 # - プロンプトは見た目だけの機能なので、機能的な設定の後に配置
 # - 存在しない場合はスキップ（必須ではない装飾機能）
-# - zsh-syntax-highlighting だけはさらに後ろ（次のセクション）
-if command -v starship >/dev/null 2>&1; then
+# - zsh-syntax-highlighting だけはさらに後ろ（Plugins セクション）
+if (( $+commands[starship] )); then
   eval "$(starship init zsh)"
 fi
 
 # ============================================================
-# zsh-補完・強調表示（視認性強化系, last）
+# Plugins (autosuggestions / syntax-highlighting, last)
 # ============================================================
 # zsh-autosuggestions: 入力補完を提案してくれる
 # zsh-syntax-highlighting: コマンドの構文を色付け表示
 # - Homebrew (macOS) または apt (/usr/share) でインストールされている場合のみ有効化
 # - 存在しない場合はスキップ（エラーにならない）
 ZSH_PLUGIN_DIRS=(/usr/share)
-command -v brew >/dev/null 2>&1 && ZSH_PLUGIN_DIRS=("$(brew --prefix)/share" $ZSH_PLUGIN_DIRS)
+[[ -n "$HOMEBREW_PREFIX" ]] && ZSH_PLUGIN_DIRS=("$HOMEBREW_PREFIX/share" $ZSH_PLUGIN_DIRS)
 
 for _dir in $ZSH_PLUGIN_DIRS; do
   if [[ -f "$_dir/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
