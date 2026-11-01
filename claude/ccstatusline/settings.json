@@ -48,6 +48,10 @@
       {
         "id": "11",
         "type": "git-ahead-behind",
+        "metadata": {
+          "symbolAhead": "󰕒",
+          "symbolBehind": "󰇚"
+        },
         "color": "hex:2B2B3A",
         "backgroundColor": "hex:A98BD8"
       }
