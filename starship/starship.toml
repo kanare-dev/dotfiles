@@ -164,7 +164,7 @@ fish_style_pwd_dir_length = 2
 
 # Git ブランチ
 [git_branch]
-symbol = ""
+symbol = "󰘬"
 style = "bg:git_branch_bg fg:dark"
 format = "[ $symbol $branch(:$remote_branch) ]($style)"
 truncation_length = 20
