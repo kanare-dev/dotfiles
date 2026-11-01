@@ -35,6 +35,7 @@
       {
         "id": "7",
         "type": "git-branch",
+        "character": "󰘬",
         "color": "hex:2B2B3A",
         "backgroundColor": "hex:7FB48C"
       },
