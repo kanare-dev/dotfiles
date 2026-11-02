@@ -123,8 +123,17 @@ ps aux | fzf | awk '{print $2}' | xargs kill
 ## 補足
 
 - 上の例は `.zshrc` に関数やエイリアスとして入れると手間が減る。現状は入れていない
-- `Ctrl-T` でも `.gitignore` を尊重させたいなら、`.zshrc` の fzf の節で
-  `export FZF_DEFAULT_COMMAND='fd --type f'` を設定する。`FZF_CTRL_T_COMMAND` と
-  `FZF_ALT_C_COMMAND`（こちらは `fd --type d`）も同様に指定できる
+- fzf の候補の出し方は環境変数で変えられる。使い分けは次のとおり
+  - `FZF_DEFAULT_COMMAND`: `fzf` を単独で実行したとき（標準入力が無いとき）の候補
+  - `FZF_CTRL_T_COMMAND`: `Ctrl-T` の候補（`FZF_DEFAULT_COMMAND` は見ない）
+  - `FZF_ALT_C_COMMAND`: `Alt-C` の候補（同上）
+- `.gitignore` を尊重させるなら、`.zshrc` の fzf の節で次のように設定する
+
+  ```bash
+  export FZF_DEFAULT_COMMAND='fd --type f'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd --type d'
+  ```
+
 - fzf 内の操作: `Ctrl-N` / `Ctrl-P`（または矢印）で移動、`Tab` で複数選択、`Esc` で中止
 - ツールのキー操作や設定の詳細は、各ツールの `--help` または公式ドキュメントを参照
