@@ -139,6 +139,7 @@ dotfiles/
 ├── vscode/
 │   └── settings.json
 ├── docs/
+│   ├── cli-tips.md
 │   └── linux-vm.md
 ├── assets/
 │   ├── terminal-1.png
