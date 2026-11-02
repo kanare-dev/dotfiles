@@ -29,9 +29,13 @@ brew "fd"                       # 簡潔な構文で高速な find の代替（.
 brew "ripgrep"                  # rg: 高速な再帰 grep の代替（.gitignore を尊重）
 brew "dust"                     # du の代替（ディレクトリごとの容量を棒グラフ付きツリーで表示）
 brew "jq"                       # コマンドラインの JSON 処理・整形ツール
+brew "yq"                       # jq 風の構文で YAML / JSON / TOML を処理・編集するツール
 brew "wget"                     # URL からファイルを取得する HTTP / FTP ダウンローダ
 brew "watch"                    # コマンドを一定間隔で繰り返し実行し、出力を更新表示
 brew "watchexec"                # ファイルの変更を検知してコマンドを自動で再実行
+brew "tealdeer"                 # tldr: コマンドの実用例だけを短く表示する man の補助（Rust 製の高速クライアント）
+brew "hyperfine"                # コマンドの実行時間を複数回測って比較するベンチマークツール
+brew "just"                     # Makefile より素直な書式のタスクランナー（justfile にコマンドを集約）
 
 # ==== TUI ツール ====
 brew "yazi"                     # Rust 製の高速なターミナルファイルマネージャ（プレビュー対応）
@@ -48,6 +52,7 @@ brew "fastfetch"                # OS やハードウェアの情報を見栄え�
 # ==== Git・セキュリティ ====
 brew "git"                      # 分散型バージョン管理システム
 brew "git-delta"                # delta: 構文ハイライトと左右比較に対応した git diff 用ページャ
+brew "difftastic"               # difft: 構文木を解釈して構造単位で差分を出す diff（整形のみの変更に惑わされない）
 brew "gh"                       # GitHub の CLI（PR・Issue・リポジトリの操作）
 brew "glab"                     # GitLab の CLI（MR・Issue・パイプラインの操作）
 brew "gitleaks"                 # git リポジトリへのシークレット（鍵・トークン）の混入を検出

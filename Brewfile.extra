@@ -16,6 +16,7 @@ brew "glow"                     # Markdown をターミナルで整形表示す�
 brew "glances"                  # CPU・メモリ・ディスク・ネットワーク・コンテナまで一画面で見る Python 製のシステムモニタ
 brew "k9s"                      # Kubernetes クラスタをターミナルで操作・監視する TUI
 brew "lazydocker"               # Docker のコンテナ・イメージ・ログをキーで操作するターミナル UI
+brew "dive"                     # Docker イメージのレイヤーごとの中身と無駄な容量を調べる TUI
 brew "ranger"                   # Vim 風のキー操作で使う Python 製のターミナルファイルマネージャ
 
 # ==== 言語・ランタイム ====
@@ -28,14 +29,21 @@ brew "ansible"                  # SSH 経由でサーバー構成を自動化す
 brew "ansible-lint"             # Ansible の playbook をベストプラクティスに沿って静的解析
 brew "yamllint"                 # YAML の構文・書式チェッカー
 brew "shellcheck"               # シェルスクリプトの静的解析ツール（バグや非互換な書き方を指摘）
+brew "actionlint"               # GitHub Actions のワークフローの静的解析（shellcheck と連携して run: も検査）
+brew "hadolint"                 # Dockerfile の linter（ベストプラクティス違反を指摘）
 brew "hashicorp/tap/terraform"  # インフラをコードで宣言して構築・管理する IaC ツール
 brew "argocd"                   # Kubernetes 向け GitOps 継続的デリバリーの CLI
 brew "kubernetes-cli"           # kubectl: Kubernetes クラスタを操作する公式 CLI
+brew "helm"                     # Kubernetes のパッケージマネージャ（チャートでアプリを配布・導入）
+brew "kubectx"                  # kubectx / kubens: Kubernetes のコンテキストと namespace を素早く切り替え
+brew "stern"                    # 複数の Pod のログをまとめて色分けして追跡
 brew "kind"                     # Docker コンテナ内にローカルの Kubernetes クラスタを作る
 
 # ==== ネットワーク ====
 brew "wireguard-tools"          # wg / wg-quick: WireGuard（軽量な VPN）の設定・起動
 brew "teamookla/speedtest/speedtest"  # Ookla 公式の回線速度測定 CLI
+brew "mtr"                      # traceroute と ping を合わせた経路ごとの遅延・損失の連続測定
+brew "nmap"                     # ネットワークのホスト・ポート・サービスを調べるスキャナ
 
 # ==== ドキュメント ====
 brew "pandoc"                   # Markdown・HTML・docx など多数の文書形式を相互変換
