@@ -7,6 +7,7 @@
 #   brew bundle --file=Brewfile.extra
 
 tap "hashicorp/tap"
+tap "teamookla/speedtest"
 
 # ==== コマンドの置き換え・ファイル操作 ====
 brew "glow"                     # Markdown をターミナルで整形表示するビューア
@@ -26,6 +27,7 @@ brew "awscli"                   # AWS 公式のコマンドラインインター
 brew "ansible"                  # SSH 経由でサーバー構成を自動化する構成管理ツール（エージェント不要）
 brew "ansible-lint"             # Ansible の playbook をベストプラクティスに沿って静的解析
 brew "yamllint"                 # YAML の構文・書式チェッカー
+brew "shellcheck"               # シェルスクリプトの静的解析ツール（バグや非互換な書き方を指摘）
 brew "hashicorp/tap/terraform"  # インフラをコードで宣言して構築・管理する IaC ツール
 brew "argocd"                   # Kubernetes 向け GitOps 継続的デリバリーの CLI
 brew "kubernetes-cli"           # kubectl: Kubernetes クラスタを操作する公式 CLI
@@ -33,6 +35,7 @@ brew "kind"                     # Docker コンテナ内にローカルの Kuber
 
 # ==== ネットワーク ====
 brew "wireguard-tools"          # wg / wg-quick: WireGuard（軽量な VPN）の設定・起動
+brew "teamookla/speedtest/speedtest"  # Ookla 公式の回線速度測定 CLI
 
 # ==== ドキュメント ====
 brew "pandoc"                   # Markdown・HTML・docx など多数の文書形式を相互変換
@@ -41,6 +44,7 @@ brew "typst"                    # Markdown 風の記法で書ける、LaTeX の�
 # ==== macOS 専用 (GUI アプリ・フォント) ====
 if OS.mac?
   cask "cmux"                           # Ghostty ベースのターミナル（縦タブ、AI コーディングエージェント向けの通知）
+  cask "copilot-cli"                    # GitHub Copilot をターミナルから使うコーディングエージェント CLI
   cask "drawio"                         # フローチャートや構成図を描くダイアグラムエディタ
   cask "font-jetbrains-mono-nerd-font"  # JetBrains Mono にアイコン用グリフを加えたフォント（eza --icons で使用）
   cask "iterm2"                         # macOS 標準 Terminal の代替となる高機能ターミナル
