@@ -92,15 +92,31 @@ chsh -s "$(command -v zsh)"
 dotfiles/
 ├── git/
 │   ├── .gitconfig
+│   ├── .gitconfig.local.example
 │   └── .gitignore_global
 ├── nvim/
+│   ├── README.md
 │   ├── init.lua
+│   ├── lazy-lock.json
 │   └── lua/
-│       └── core.lua
+│       ├── core.lua
+│       ├── lazy_bootstrap.lua
+│       ├── lsp_setup.lua
+│       └── plugins/
+│           ├── blink.lua
+│           ├── git.lua
+│           ├── lsp.lua
+│           ├── markdown.lua
+│           ├── neotree.lua
+│           ├── telescope.lua
+│           ├── treesitter.lua
+│           └── ui.lua
 ├── zsh/
-│   └── .zshrc
+│   ├── .zshrc
+│   └── CLAUDE.md
 ├── tmux/
-│   └── .tmux.conf
+│   ├── .tmux.conf
+│   └── README.md
 ├── starship/
 │   └── starship.toml
 ├── claude/
@@ -116,17 +132,28 @@ dotfiles/
 ├── markdownlint/
 │   └── .markdownlint-cli2.jsonc
 ├── ghostty/
-│   └── config
+│   ├── config
+│   └── README.md
 ├── fastfetch/
 │   └── config.jsonc
 ├── vscode/
 │   └── settings.json
 ├── docs/
 │   └── linux-vm.md
+├── assets/
+│   ├── terminal-1.png
+│   └── terminal-2.png
+├── .claude/
+│   ├── settings.json
+│   ├── commands/
+│   │   └── tidy.md
+│   └── hooks/
+│       └── check-dirty.sh
 ├── Brewfile
 ├── Brewfile.extra
 ├── install.sh
 ├── uninstall.sh
+├── CLAUDE.md
 └── README.md
 ```
 
