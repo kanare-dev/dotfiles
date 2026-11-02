@@ -155,7 +155,16 @@ fi
 # fzf（履歴・検索）
 # ============================================================
 # 思想: 履歴検索の中核。インストール方法の違い（手動 / Homebrew / apt）を吸収する
+# - 候補の列挙は fd に任せて .gitignore を尊重する（node_modules などを出さない）
+# - Ctrl-T / Alt-C は FZF_DEFAULT_COMMAND を見ないため、個別の変数にも同じ値を渡す
+# - 内蔵の探索に合わせて隠しファイルは含め、.git だけ除く
 if (( $+commands[fzf] )); then
+  if (( $+commands[fd] )); then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+  fi
+
   if [[ -f ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
   elif [[ -n "$HOMEBREW_PREFIX" ]]; then
