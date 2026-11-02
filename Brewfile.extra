@@ -12,7 +12,10 @@ tap "hashicorp/tap"
 brew "glow"                     # Markdown をターミナルで整形表示するビューア
 
 # ==== TUI ツール ====
+brew "glances"                  # CPU・メモリ・ディスク・ネットワーク・コンテナまで一画面で見る Python 製のシステムモニタ
 brew "k9s"                      # Kubernetes クラスタをターミナルで操作・監視する TUI
+brew "lazydocker"               # Docker のコンテナ・イメージ・ログをキーで操作するターミナル UI
+brew "ranger"                   # Vim 風のキー操作で使う Python 製のターミナルファイルマネージャ
 
 # ==== 言語・ランタイム ====
 brew "go"                       # Go 言語の処理系
