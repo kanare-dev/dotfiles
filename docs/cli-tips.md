@@ -16,8 +16,8 @@ fzf / zoxide / ripgrep / fd / bat / eza を組み合わせた便利な使い方�
 | `zi` | 移動履歴を fzf で絞り込んで移動 |
 | `ls` / `ll` / `lt` | eza に置き換え済み |
 
-`FZF_DEFAULT_COMMAND` などの fzf 用の環境変数は設定していない。
-そのため `Ctrl-T` は fzf 標準の探索（`.gitignore` を考慮しない）になる。
+`fd` が入っていれば、fzf の候補は `fd` で列挙する（`.gitignore` を尊重し、隠しファイルは含めて `.git` だけ除く）。
+`fd` が無い環境では fzf 標準の探索になる。
 
 ## 各ツールの基本
 
@@ -127,13 +127,8 @@ ps aux | fzf | awk '{print $2}' | xargs kill
   - `FZF_DEFAULT_COMMAND`: `fzf` を単独で実行したとき（標準入力が無いとき）の候補
   - `FZF_CTRL_T_COMMAND`: `Ctrl-T` の候補（`FZF_DEFAULT_COMMAND` は見ない）
   - `FZF_ALT_C_COMMAND`: `Alt-C` の候補（同上）
-- `.gitignore` を尊重させるなら、`.zshrc` の fzf の節で次のように設定する
-
-  ```bash
-  export FZF_DEFAULT_COMMAND='fd --type f'
-  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  export FZF_ALT_C_COMMAND='fd --type d'
-  ```
+- 設定は `zsh/.zshrc` の fzf の節にある。`fd` が入っているときだけ有効になる
+- 候補を変えたい場合は、その節の変数を書き換える（隠しファイルを除くなら `--hidden` を外す）
 
 - fzf 内の操作: `Ctrl-N` / `Ctrl-P`（または矢印）で移動、`Tab` で複数選択、`Esc` で中止
 - ツールのキー操作や設定の詳細は、各ツールの `--help` または公式ドキュメントを参照
