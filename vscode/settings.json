@@ -11,7 +11,7 @@
   // Editor
   // ========================================
   // エディタのフォント(ターミナルとそろえる)
-  "editor.fontFamily": "JetBrainsMono Nerd Font, 'Hiragino Sans', Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "JetBrainsMono Nerd Font, PlemolJP Console NF, Menlo, Monaco, 'Courier New', monospace",
   // 保存時に自動整形
   "editor.formatOnSave": true,
   // ミニマップを非表示
@@ -59,7 +59,7 @@
   // 既定のシェルをzshに固定
   "terminal.integrated.defaultProfile.osx": "zsh",
   // Nerd Fontを優先し、なければ等幅フォントにフォールバック
-  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font, 'Hiragino Sans', Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font, PlemolJP Console NF, Menlo, Monaco, 'Courier New', monospace",
   // ターミナル起動時の初期ヒントを非表示
   "terminal.integrated.initialHint": false,
 
