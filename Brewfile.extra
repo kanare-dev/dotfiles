@@ -55,6 +55,7 @@ if OS.mac?
   cask "copilot-cli"                    # GitHub Copilot をターミナルから使うコーディングエージェント CLI
   cask "drawio"                         # フローチャートや構成図を描くダイアグラムエディタ
   cask "font-jetbrains-mono-nerd-font"  # JetBrains Mono にアイコン用グリフを加えたフォント（eza --icons で使用）
+  cask "font-plemol-jp-nf"              # 日本語等幅フォント PlemolJP + Nerd Font（JetBrains Mono に無い「℃」や日本語のフォールバック用）
   cask "iterm2"                         # macOS 標準 Terminal の代替となる高機能ターミナル
   cask "macvim-app"                     # macOS ネイティブ GUI の Vim
   cask "supercollider"                  # 音響合成・アルゴリズミック作曲のためのサーバー・言語・IDE
