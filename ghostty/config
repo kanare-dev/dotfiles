@@ -3,6 +3,8 @@
 # =========================
 font-size = 14
 font-family = JetBrainsMono Nerd Font
+# ℃ などが JetBrains Mono に無く縦長のフォントで描かれるため、日本語フォントを後段に置く
+font-family = Hiragino Sans
 background-opacity = 0.85
 background-blur = 20
 minimum-contrast = 1.3

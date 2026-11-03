@@ -7,7 +7,7 @@
 | 項目 | 値 | 内容 |
 | --- | --- | --- |
 | `font-size` | `14` | フォントサイズ |
-| `font-family` | `JetBrainsMono Nerd Font` | フォント |
+| `font-family` | `JetBrainsMono Nerd Font` → `Hiragino Sans` | フォント(2行目は「℃」などが無い字用のフォールバック) |
 | `background-opacity` | `0.85` | 背景の不透明度（0〜1、低いほど透過） |
 | `background-blur` | `20` | 背景のぼかし強度 |
 | `minimum-contrast` | `1.3` | 文字色と背景色の最低コントラスト比 |
