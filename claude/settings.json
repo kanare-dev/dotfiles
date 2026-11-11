@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "command -v afplay >/dev/null && afplay /System/Library/Sounds/Glass.aiff || true",
+            "command": "command -v afplay >/dev/null && afplay /System/Library/Sounds/Pop.aiff || true",
             "async": true
           }
         ]
@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "command -v afplay >/dev/null && afplay /System/Library/Sounds/Funk.aiff || true",
+            "command": "command -v afplay >/dev/null && afplay /System/Library/Sounds/Morse.aiff || true",
             "async": true
           }
         ]
